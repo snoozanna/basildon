@@ -1,0 +1,1014 @@
+:: StoryTitle
+Basildon
+
+
+:: StoryData
+{
+	"ifid": "C560BCB6-275F-4FF0-B115-D23E1DBADDFF",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "landing",
+	"zoom": 1
+}
+
+
+
+:: Story Stylesheet [stylesheet]
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+@import url("../styles/generics.css");
+@import url("../styles/styles.css");
+
+
+
+:: UserScript [script]
+
+:: Story JavaScript [script]
+$('#ui-bar').remove();
+$(document.head).find('#style-ui-bar').remove();
+
+
+/* Google Tag */
+setup.JSLoaded = false;
+ var lockID = LoadScreen.lock();  // Lock loading screen
+ importScripts("https://www.googletagmanager.com/gtag/js?id=G-C6NP1M5W57")
+     .then(function() {
+
+         setup.JSLoaded = true;
+         window.dataLayer = window.dataLayer || [];
+         window.gtag = function (){ dataLayer.push(arguments); };
+         gtag('js', new Date());
+         gtag('config', 'G-C6NP1M5W57');
+          //  console.log("Sending to GA");
+         LoadScreen.unlock(lockID);  // Unlock loading screen
+     }).catch(function(error) {
+         console.log("Error: Could not load 'gtag.js'.");
+      LoadScreen.unlock(lockID);  // Unlock loading screen
+     }
+ );
+
+/* Track Passage Views using SugarCube's passage display events */
+$(document).on(':passagedisplay', function(ev) {
+    var passageName = ev.passage.title;
+    // console.log("sending", passageName, "to GA")
+    // Send passage view event to Google Analytics
+    if (setup.JSLoaded) {
+        gtag('event', 'Passage View', {
+            event_label: passageName,
+            event_category: 'Passage',
+        });
+    }
+});
+
+
+ $(document).on('click', 'a', function (ev) {
+ // Get the destination of the clicked link var passage 
+ var passage = $(this).attr('data-passage');
+ // Send the click event to Google Analytics
+    if (setup.JSLoaded && passage) {
+      // console.log("sending", passage, "click to GA")
+        gtag('event', 'Navigation', {
+            event_label: passage,
+            event_category: 'GuestClick'
+        });
+    }
+ });
+
+
+
+// add placeholder text to input 
+
+setup.addPlaceholder = () => {
+
+    const textbox = document.getElementById("textbox-codeword");
+    if (textbox) {
+        console.log("Found textbox:", textbox);
+        textbox.setAttribute("placeholder", "Type here");
+    }
+
+} 
+
+:: StoryInit
+<<cacheaudio "success" "../assets/sound/uploadcomplete.mp3">>
+<<cacheaudio "notification" "../assets/sound/Notification.wav">>
+<<cacheaudio "ping" "../assets/sound/ping1.mp3">>
+<<cacheaudio "ticker" "../assets/sound/ticker.mp3">>
+
+<script>
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = "../assets/img/leadImage.png";
+    document.head.appendChild(link);
+</script>
+
+
+
+:: header[nobr]
+<header class="standard">
+ <div class="logo-wrapper">
+   <img src=""/>
+   </div>
+   <div class="title-wrapper">
+   <h1>Basildon</h1>
+   </div>
+</header>
+
+
+
+
+:: footer[nobr]
+
+<footer>
+    <<link [img[../assets/img/back-black.png]]>>
+        <<goto $prevpass>>
+    <</link>>
+
+   
+</footer>
+
+:: navbuttons[nobr]
+
+<div class="footer-icons">
+<<link [img[../assets/img/back-sharp.png][$prevpass]]>>
+    <</link>>
+    <<link [img[../assets/img/replay-sharp.png][$pass]]>>
+    <</link>>
+    
+<div><div/>
+
+</div>
+
+:: navbuttonsb[nobr]
+
+<div class="footer-icons">
+<<link [img[../assets/img/back-sharp-b.png][$prevpass]]>>
+    <</link>>
+    <<link [img[../assets/img/replay-sharp-b.png][$pass]]>>
+    <</link>>
+    <<link [img[../assets/img/for-sharp-b.png][$nextpass]]>>
+    <</link>>
+
+</div>
+
+:: navbuttonsend[nobr]
+
+<div class="footer-icons">
+<<link [img[../assets/img/back-sharp-b.png][$prevpass]]>>
+    <</link>>
+    <<link [img[../assets/img/replay-sharp-b.png][$pass]]>>
+    <</link>>
+</div>
+
+:: navbuttonstext[nobr]
+
+<div class="nav-btn-container btn-container">
+ <<button "Back">>
+    <<goto $prevpass>>
+<</button>>
+ <<button "Replay">>
+    <<goto $pass>>
+<</button>>
+   
+</div>
+
+
+
+
+
+
+:: footeroptionappears[nobr]
+<<set $showWallet to false>>
+<footer class="grid-item footer">
+  <<link [img[../assets/img/back-black.png]]>>
+        <<goto $prevpass>>
+    <</link>>
+  /* <<link "W">>
+        <<set $showWallet to true>>
+        <<goto "wallet">>
+        <</link>> */
+           /* <<link [img[../assets/img/for-black.png]]>>
+        <<goto $nextpass>>
+    <</link>> */
+    <div id="nextButtonContainer">
+     </div>
+</footer>
+
+
+
+:: headerlanding[nobr]
+<header class="standard scrollable">
+ <div class="logo-wrapper">
+   /* <img src=""/> */
+   </div>
+</header>
+
+
+:: landing [nobr] 
+<<set $prevpass to "landing">>
+<<set $pass to "landing">>
+<<set $nextpass to "intro1">>
+<<set $userchoices to {
+    language: null,
+    audioOn: true
+}>>
+<<set $btnAppearTime to "1s">>
+<<addclass "body" "lime">>
+
+/* <div class="hide warning"><h1>Please view this on a phone</h1></div> */
+<main class="landing flex-col-cen">
+<span>Harris Academy Kingswood presents...</span>
+<h2>Welcome</h2>
+  <h1 class="computer">Party</h1>
+<<button "Begin">>
+    <<goto $nextpass>>
+<</button>>
+   
+</main>
+
+/* <<include "wallet">> */
+
+:: _templateIntro[nobr]
+<<addclass "body" "lime">>
+<main>
+<div id="audio"></div>
+    <div id="msgMount">
+        <<if $pass>>
+             <<set $uniqueContent to $pass+"-text">>
+            <<include $uniqueContent>>
+            <div class="btn-container" id="btnContainer">
+            </div>
+        <<else>>
+            No content provided.
+        <</if>>
+        </div>
+  
+</main> 
+<<include "navbuttonsb">>
+
+:: _templateStory [nobr]
+
+<main>
+<div id="audio"></div>
+    <div id="msgMount"> </div>
+        <<if $pass>>
+      
+             <<set $uniqueContent to $pass+"-text">>
+            <<silently>>
+            <<timed 0.1s>>
+            <<append "#msgMount">>
+              <<include $uniqueContent>>
+              <</append>>
+              <</timed>>
+            <</silently>>
+               <div class="btn-container" id="btnContainer">
+            </div>
+        <<else>>
+            No content provided.
+        <</if>>
+
+</main>
+<<include "navbuttonsb">>
+
+
+:: sealButton [nobr]
+<div class="sealBtn-container">
+    <<button [img["../assets/img/LL_wax_seal.png"]]>>
+      <<goto $nextpass>>
+        <</button>>
+        </div>
+
+
+
+
+
+
+
+
+:: intro1 [nobr]
+<<set $prevpass to "landing">>
+<<set $pass to "intro1">>
+<<set $nextpass to "game1-landing">>
+
+<<include "_templateIntro">>
+
+
+:: intro1-text [nobr]
+<<timed 0.2s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p>Hello</p>
+<p>We are students from across different years</p>
+<p>We’ve made this for you as we’ve been where you are. </p>
+<p>We’ve all been new here and we know how you might be feeling</p>
+<p>Nervous, excited, slightly confused!</p>
+<p>All of which is ok. </p>
+<p>It would be odd if you didn’t feel a mix of all those things. </p>
+<br/>
+<p>We’ve made this Welcome Game</p>
+<p>A game to help you settle in</p>
+<p>Make you feel at ease</p>
+<p>To welcome you. </p>
+<p>To Harris Academy Kingswood.</p>
+<br/>
+<p>It’ll have some tips to help being in a massive school</p>
+<p>And some tools to remember your timetable</p>
+<p>But also, it’ll have games. </p>
+<p>And with games - there’s prizes. </p>
+<p>Complete our challenges then you get a prize. </p>
+<br/>
+<p>Shall we get started? </p>
+<br/>
+<<button "Start">>
+    <<goto $nextpass>>
+    <</button>>
+
+
+:: game1-landing
+<<set $prevpass to "intro1">>
+<<set $pass to "game1-landing">>
+<<set $nextpass to "game1-intro">>
+<<audio ":all" "stop">>
+<<addclass "body" "white eyes">>
+<main class="landing flex-col-cen">
+  <h1>Game 1</h1>
+  <h2>And You Are?</h2>
+<<button "Begin">>
+    <<goto $nextpass>>
+<</button>>
+   
+</main>
+<<include "navbuttonsb">>
+
+:: game1-intro [nobr]
+<<set $prevpass to "game1-landing">>
+<<set $pass to "game1-intro">>
+<<set $nextpass to "game1">>
+<<audio ":all" "stop">>
+<<addclass "body" "white">>
+<<include "_templateStory">>
+
+:: game1-intro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 1: And You Are?</p>
+<div id="msgMount">
+</div>
+<p>Welcome to ‘And You Are?’ </p>
+<p>This game is a bit like heads down thumbs up - but we’ve changed it!</p>
+<p>You will place your head down on the desk</p>
+<p>There will be statements on the screen, which your teacher will read out. </p>
+<p>If you agree or have something in common with that statement, raise your head and look at who else has their heads raised. </p>
+<p><b>(You can’t speak - but you can make eye contact with that person)</b></p>
+<p>Then put your head down again, the teacher click ‘Next’ to reveal the next statement! </p>
+<br/>
+<p>Ready? Then get your heads on the table and let’s begin! </p>
+<<button "Ready">>
+    <<goto $nextpass>>
+    <</button>>
+
+:: game1 [nobr]
+
+<<set $prevpass = "game1-intro">>
+<<set $pass = "game1">>
+<<set $nextpass = "game1-outro">>
+<<audio ":all" "stop">>
+<<addclass "body" "white">>
+
+<<if $statementsGame1 is undefined>>
+<<set $statementsGame1 = [
+"Have a sibling",
+"Likes watching films",
+"Enjoy art",
+"Has a friend in the class",
+"Supports a football team",
+"Is organised",
+"Enjoys coming to school",
+"Have a hidden talent",
+"Likes to play sports",
+"Likes listening to music"
+]>>
+<</if>>
+
+<<if $statementIndexGame1 is undefined>>
+<<set $statementIndexGame1 = 0>>
+<</if>>
+
+<main>
+
+<<include "game1-content">>
+
+</main>
+
+<<include "navbuttonsb">>
+
+:: game1-content [nobr]
+
+<div id="gameArea">
+
+    <div class="statement">
+      <p>  <<= $statementsGame1[$statementIndexGame1]>></p>
+    </div>
+
+    <div class="buttons">
+
+    <<if $statementIndexGame1 gt 0>>
+        <<button "Back">>
+            <<set $statementIndexGame1-->>
+            <<replace "#gameArea">>
+                <<include "game1-content">>
+            <</replace>>
+        <</button>>
+    <</if>>
+
+    <<if $statementIndexGame1 lt $statementsGame1.length - 1>>
+
+        <<button "Next">>
+            <<set $statementIndexGame1++>>
+            <<replace "#gameArea">>
+                <<include "game1-content">>
+            <</replace>>
+        <</button>>
+
+    <<else>>
+
+        [[Finish->$nextpass]]
+
+    <</if>>
+
+    </div>
+
+</div>
+
+:: game1-outro [nobr]
+<<set $prevpass to "game1">>
+<<set $pass to "game1-outro">>
+<<set $nextpass to "game2-landing">>
+<<audio ":all" "stop">>
+<<addclass "body" "white">>
+<<include "_templateStory">>
+
+:: game1-outro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 1: And You Are?</p>
+<div id="msgMount">
+</div>
+<p>Thanks for playing. </p>
+<p>When we made these games, we played and then reflected. </p>
+<p>You might want to do that now. </p>
+<p>What did you connect on? </p>
+<p>Can you find something you all would put your head up for? </p>
+<p>Something you all connect on.</p>
+<p>When ready to move on, click ‘next’ for the next game. </p>
+<br/>
+<<button "Next">>
+    <<goto $nextpass>>
+    <</button>>
+
+:: game2-landing
+<<set $prevpass to "game1-outro">>
+<<set $pass to "game2-landing">>
+<<set $nextpass to "game2-intro">>
+<<audio ":all" "stop">>
+
+<main class="landing flex-col-cen">
+  <h1>Game 2</h1>
+  <h2>This or That.</h2>
+<<button "Begin">>
+    <<goto $nextpass>>
+<</button>>
+   
+</main>
+<<include "navbuttonsb">>
+
+:: game2-intro [nobr]
+<<set $prevpass to "game2-landing">>
+<<set $pass to "game2-intro">>
+<<set $nextpass to "game2">>
+<<audio ":all" "stop">>
+
+<<include "_templateStory">>
+
+:: game2-intro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 2: This or That</p>
+<div id="msgMount">
+</div>
+<p>Welcome to This or That, where you will be faced with a series of statements that you may either agree or disagree with! </p>
+<br/>
+<p>If you AGREE you stand up and if you DISAGREE then you stay sat down... Simple. </p>
+<br/>
+<p>For example, one statement could be ‘Does pineapple belong on pizza?’ </p>
+<p>A controversial one! </p>
+<p>You will have 10 seconds to make your decision. </p>
+<br/>
+<p>Then, teacher, you have the chance to ask why people chose their answer.</p> 
+<p>Ready for the first statement?</p>
+<br/>
+<<button "Ready">>
+    <<goto $nextpass>>
+    <</button>>
+
+:: game2 [nobr]
+
+<<set $prevpass = "game2-intro">>
+<<set $pass = "game2">>
+<<set $nextpass = "game2-outro">>
+
+<<audio ":all" "stop">>
+
+<<if $statementsGame2 is undefined>>
+<<set $statementsGame2 = [
+"Is a burger a sandwich?",
+"Movies or TV shows?",
+"Books or video games?",
+"Is it better to be rich, but sad, or poor and happy?",
+"Where would you go on holiday….the beach or the mountains?",
+]>>
+<</if>>
+
+<<set $statementsGame2 = [
+    {
+    question: "Is a burger a sandwich?",
+    left: "Burger",
+    right: "Sandwich", 
+    leftClass: "burger",
+    rightClass: "sandwich"
+},
+{
+    question: "Movies or TV shows?",
+    left: "Movies",
+    right: "TV Shows", 
+     leftClass: "movie",
+    rightClass: "tv"
+},
+{
+    question: "Books or video games?",
+    left: "Books",
+    right: "Video games", 
+       leftClass: "books",
+    rightClass: "gaming"
+},
+{
+    question: "Is it better to be rich, but sad, or poor and happy?",
+    left: "rich, but sad",
+    right: "poor and happy?", 
+      leftClass: "rich",
+    rightClass: "happy"
+},
+{
+    question: "Where would you go on holiday?",
+    left: "Beach",
+    right: "Mountains", 
+     leftClass: "beach",
+    rightClass: "mountains"
+}
+
+
+]>>
+
+<<if $statementIndexGame2 is undefined>>
+<<set $statementIndexGame2 = 0>>
+<</if>>
+
+<main>
+
+<<include "game2-content">>
+
+</main>
+
+<<include "navbuttonsb">>
+
+:: game2-content [nobr]
+
+<div id="gameArea">
+
+   <div class="statement">
+    <<= $statementsGame2[$statementIndexGame2].question >>
+</div>
+
+<div class="split-screen">
+
+    <div class="side left">
+        <div class="choice">
+            <<= $statementsGame2[$statementIndexGame2].left >>
+        </div>
+    </div>
+
+    <div class="side right">
+        <div class="choice">
+            <<= $statementsGame2[$statementIndexGame2].right >>
+        </div>
+    </div>
+
+</div>
+
+    <div class="buttons">
+
+    <<if $statementIndexGame2 gt 0>>
+        <<button "Back">>
+            <<set $statementIndexGame2-->>
+            <<replace "#gameArea">>
+                <<include "game2-content">>
+            <</replace>>
+        <</button>>
+    <</if>>
+
+    <<if $statementIndexGame2 lt $statementsGame2.length - 1>>
+
+        <<button "Next">>
+            <<set $statementIndexGame2++>>
+            <<replace "#gameArea">>
+                <<include "game2-content">>
+            <</replace>>
+        <</button>>
+
+    <<else>>
+
+        [[Finish->game2-outro]]
+
+    <</if>>
+
+    </div>
+
+</div>
+<<done>>
+
+<<addclass ".left" $statementsGame2[$statementIndexGame2].leftClass>>
+<<addclass ".right" $statementsGame2[$statementIndexGame2].rightClass>>
+<</done>>
+
+:: game2-outro [nobr]
+<<set $prevpass to "game2">>
+<<set $pass to "game2-outro">>
+<<set $nextpass to "game3-landing">>
+<<audio ":all" "stop">>
+
+<<include "_templateStory">>
+
+:: game2-outro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 2: This or That</p>
+<div id="msgMount">
+</div>
+<p>Thank you for playing This or That. </p>
+<p>Your time here will be filled with making decisions</p>
+<p>Sometimes you will agree with others, sometimes you won’t.</p> 
+<p>We should try to keep calm and allow people to express their opinions though. </p>
+<br/>
+<p>We hope you’ve made some connections - and maybe learnt a bit about the rest of your form group too. </p>
+<p>Maybe you should all order a pineapple pizza now, or not? </p>
+<p>When ready to move on, click ‘next’ for the next game. </p>
+
+<br/>
+<<button "Next">>
+    <<goto $nextpass>>
+    <</button>>
+
+
+:: game3-landing
+<<set $prevpass to "game3-outro">>
+<<set $pass to "game3-landing">>
+<<set $nextpass to "game3-intro">>
+<<audio ":all" "stop">>
+
+<main class="landing flex-col-cen">
+  <h1>Game 3</h1>
+  <h2>Memory</h2>
+<<button "Begin">>
+    <<goto $nextpass>>
+<</button>>
+   
+</main>
+<<include "navbuttonsb">>
+
+:: game3-intro [nobr]
+<<set $prevpass to "game3-landing">>
+<<set $pass to "game3-intro">>
+<<set $nextpass to "game3">>
+<<audio ":all" "stop">>
+
+<<include "_templateStory">>
+
+:: game3-intro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 3: Memory</p>
+<div id="msgMount">
+</div>
+<p>Knowing where you need to be and when is going to help you here. </p>
+<p>So memorising your timetable is going to be super helpful.</p> 
+<p>Don’t worry if that feels daunting?</p>
+<p>We’ve got you covered - with our game MEMORY. </p>
+<br/>
+<p>It’s simple, on the screen there will be 5 items - you need to memorise them. </p>
+<p>We recommend playing in pairs/small groups - but it’s up to your teacher. </p>
+<p>Write down the items and the order. </p>
+<p>Get them right, get a point. </p>
+<p>Most points WINS. </p>
+<p>Good luck. </p>
+<br/>
+<<button "Ready">>
+    <<goto $nextpass>>
+    <</button>>
+
+:: game3 [nobr]
+
+<<set $prevpass = "game3-intro">>
+<<set $pass = "game3">>
+<<set $nextpass = "game3-outro">>
+
+<<audio ":all" "stop">>
+
+
+<<if $roundsGame3 is undefined>>
+<<set $roundsGame3 = [
+{
+    image: "images/game2/round1.jpg",
+    answer: "images/game2/round1-answer.jpg"
+},
+{
+    image: "images/game2/round2.jpg",
+    answer: "images/game2/round2-answer.jpg"
+},
+{
+    image: "images/game2/round3.jpg",
+    answer: "images/game2/round3-answer.jpg"
+},
+{
+    image: "images/game2/round4.jpg",
+    answer: "images/game2/round4-answer.jpg"
+}
+]>>
+<</if>>
+
+<<if $roundIndexGame3 is undefined>>
+<<set $roundIndexGame3 = 0>>
+<<set $game3Stage = "image">>
+<</if>>
+
+<main>
+
+<<include "game3-content">>
+
+</main>
+
+<<include "navbuttonsb">>
+
+:: game3-content [nobr]
+<<set _round = $roundsGame3[$roundIndexGame3]>>
+
+<div id="gameArea">
+
+<<switch $game3Stage>>
+
+<<case "image">>
+
+<h2>Round <<= $roundIndexGame3 + 1>></h2>
+
+<img src="<<=_round.image>>" width="900">
+
+<p><strong>Show this image for 10 seconds.</strong></p>
+
+<<timed 10s>>
+    <<replace "#gameArea">>
+        <<set $game3Stage = "check">>
+        <<include "game3-content">>
+    <</replace>>
+<</timed>>
+
+<<case "check">>
+
+<h2>Round <<= $roundIndexGame3 + 1>></h2>
+
+<p><strong>Teacher, check the answers.</strong></p>
+
+<<button "Reveal Answer">>
+    <<set $game3Stage = "answer">>
+    <<replace "#gameArea">>
+        <<include "game3-content">>
+    <</replace>>
+<</button>>
+
+<<case "answer">>
+
+<h2>Round <<= $roundIndexGame3 + 1>> Answer</h2>
+
+<img src="<<=_round.answer>>" width="900">
+
+<<if $roundIndexGame3 < $roundsGame3.length - 1>>
+
+    <<button "Next">>
+        <<set $roundIndexGame3++>>
+        <<set $game3Stage = "image">>
+        <<replace "#gameArea">>
+            <<include "game3-content">>
+        <</replace>>
+    <</button>>
+
+<<else>>
+
+    [[Next->$nextpass]]
+
+<</if>>
+
+<</switch>>
+
+</div>
+
+:: game3-outro [nobr]
+<<set $prevpass to "game3">>
+<<set $pass to "game3-outro">>
+<<set $nextpass to "game3">>
+<<audio ":all" "stop">>
+
+<<include "_templateStory">>
+
+:: game3-outro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 3: Memory</p>
+<div id="msgMount">
+</div>
+<p>Who got the most points? </p>
+<p>We can’t see as we are pre-recorded - but well done! </p>
+<p>We hope this game helps you learn your timetable</p>
+<p>It’s not a fun task to do - but it will help you settle in - and not be late. </p>
+<p>But where you will go, that’s in our last game...</p>
+<br/>
+<p>When ready to move on, click ‘next’ for the next game. </p>
+
+<br/>
+<<button "Next">>
+    <<goto $nextpass>>
+    <</button>>
+
+
+:: game4-landing
+<<set $prevpass to "game3-outro">>
+<<set $pass to "game4-landing">>
+<<set $nextpass to "game4-intro">>
+<<audio ":all" "stop">>
+
+<main class="landing flex-col-cen">
+  <h1>Game 4</h1>
+  <h2>The Tour Game</h2>
+<<button "Begin">>
+    <<goto $nextpass>>
+<</button>>
+   
+</main>
+<<include "navbuttonsb">>
+
+:: game4-intro [nobr]
+<<set $prevpass to "game4-landing">>
+<<set $pass to "game4-intro">>
+<<set $nextpass to "game4">>
+<<audio ":all" "stop">>
+
+<<include "_templateStory">>
+
+:: game4-intro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 4: The Tour Game</p>
+<div id="msgMount">
+</div>
+<p>Hello everyone, and welcome to The Tour Game! </p>
+<p>Now we have already played a couple of games</p>
+<p>But, sadly, our time is coming to an end.</p>
+<p>But don’t worry we have time for one more - The Tour Game.</p>
+<p>Basically you are going to receive a map that will have 5 locations written on it.</p>
+<br/>
+<p>At each place there will be something that you need to look out for aka a treasure hunt.  </p>
+<p>These five items will help you make a CODEWORD that will help you complete the game. </p>
+<p>Remember where you go too - it’ll help</p>
+<p>Teacher, all of the information is on the MAP. </p>
+<p>Good luck.</p>
+
+<br/>
+<<button "Ready">>
+    <<goto $nextpass>>
+    <</button>>
+
+:: game4 [nobr]
+
+<<set $prevpass = "game4-intro">>
+<<set $pass = "game4">>
+<<set $nextpass = "game4-outro">>
+
+<<audio ":all" "stop">>
+
+
+<main>
+
+<<include "game4-content">>
+
+</main>
+
+<<include "navbuttonsb">>
+
+:: game4-content [nobr]
+content
+<<include "game4-codeword">>
+
+:: game4-codeword [nobr]
+<<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
+
+<div class="codeinput">
+  <<textbox "$codeword" "">>
+
+  <div class="input-btn">
+  <<button "Enter">>
+    <<set $codeword to $codeword.toUpperCase().trim()>>
+
+    /* Correct */
+    <<if $codeword is "ADAPT">>
+      <<replace "#coderesult">><span>Correct!</span>
+      <</replace>>
+     
+       <<timed 2s>>
+        <<goto $nextpass>>
+        <</timed>>
+
+    <<elseif $codeword isnot "">>
+      /* Incorrect (non-empty) */
+      <<replace "#coderesult">><span>Try again.</span><</replace>>
+      <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+    <</if>>
+  <</button>>
+  </div>
+</div>
+<br/>
+<div id="coderesult"></div>
+
+<<done>><<set $e to setup.addPlaceholder()>><</done>>
+
+
+:: game4-outro [nobr]
+<<set $prevpass to "game4">>
+<<set $pass to "game4-outro">>
+<<set $nextpass to "game4">>
+<<audio ":all" "stop">>
+
+<<include "_templateStory">>
+
+:: game4-outro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<p class="bold">GAME 4: Outro</p>
+<div id="msgMount">
+</div>
+<p>You did it. </p>
+<p>These are five locations that might be good to know in your first year. </p>
+<p>Remember them! </p>
+<p>We chose that going to a new school you have to ADAPT to new challenges, such as the school. </p>
+<br/>
+<p>And now we are back to where it all started, YOUR TUTOR BASE.</p>
+<br/>
+<p>Now, we did promise prizes didn’t we?</p>
+<br/>
+<p>Teacher, please hand out the spectacular smelly sticker that shows you now have the fundamentals of joining a secondary school!</p>
+<br/>
+<p>Remember if you have any issues, you can always go to your teacher in your tutor.</p>
+<br/>
+<p>Thanks for playing - and welcome to Harris Academy Kingswood. </p>
+<br/>
+<<button "Next">>
+    <<goto $nextpass>>
+    <</button>>
+
+:: end [nobr]
+<<set $prevpass to "game4-outro">>
+<<set $pass to "end">>
+<<set $nextpass to "end">>
+
+<<include "header">>
+<main>
+    <p>Closing image </p> 
+        <div class="btn-container">
+
+            <<button "Back">>
+                <<goto $prevpass>>
+            <</button>>
+            <<button "Start again">>
+                <<script>>
+                Engine.restart()
+                <</script>>
+                <</button>>
+        </div>
+</main>
