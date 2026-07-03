@@ -178,6 +178,26 @@ setup.addPlaceholder = () => {
 &lt;&lt;cacheaudio &quot;notification&quot; &quot;../assets/sound/Notification.wav&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;ping&quot; &quot;../assets/sound/ping1.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;ticker&quot; &quot;../assets/sound/ticker.mp3&quot;&gt;&gt;
+&lt;&lt;set $games = {
+    1: {
+        number: 1,
+        name: &quot;And you are?&quot;
+    },
+    2: {
+        number: 2,
+        name: &quot;This or That&quot;
+    },
+    3: {
+        number: 3,
+        name: &quot;Memory&quot;
+    },
+    4: {
+        number: 4,
+        name: &quot;The Tour Game&quot;
+    }
+}&gt;&gt;
+
+&lt;&lt;set $currentGame = $games[1]&gt;&gt;
 
 &lt;script&gt;
     const link = document.createElement(&quot;link&quot;);
@@ -281,7 +301,23 @@ setup.addPlaceholder = () => {
         &lt;/div&gt;
   
 &lt;/main&gt; 
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="_templateStory" tags="nobr" position="225,225" size="100,100">&lt;main&gt;
+&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="_templateGameLanding" tags="nobr" position="225,225" size="100,100">&lt;&lt;addclass &quot;body&quot; &quot;lime&quot;&gt;&gt;
+&lt;main class=&quot;landing flex-col-cen&quot;&gt;
+
+     &lt;div class=&quot;landing-title-container&quot;&gt;
+          &lt;h1 class=&quot;computer&quot; &gt;Game $currentGame.number&lt;/h1&gt;
+          &lt;h2&gt;$currentGame.name&lt;/h2&gt;
+     &lt;/div&gt;
+
+&lt;&lt;button &quot;Begin&quot;&gt;&gt;
+    &lt;&lt;goto $nextpass&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+   
+&lt;/main&gt;
+&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="_templateStory" tags="nobr" position="350,225" size="100,100">&lt;&lt;addclass &quot;body&quot; &quot;lime&quot;&gt;&gt;
+&lt;&lt;include &quot;game-intro-header&quot;&gt;&gt;
+
+&lt;main&gt;
 &lt;div id=&quot;audio&quot;&gt;&lt;/div&gt;
     &lt;div id=&quot;msgMount&quot;&gt; &lt;/div&gt;
         &lt;&lt;if $pass&gt;&gt;
@@ -301,15 +337,18 @@ setup.addPlaceholder = () => {
         &lt;&lt;/if&gt;&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="sealButton" tags="nobr" position="350,225" size="100,100">&lt;div class=&quot;sealBtn-container&quot;&gt;
+&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="game-intro-header" tags="nobr" position="475,225" size="100,100">&lt;header class=&quot;game-intro-header&quot;&gt;
+ &lt;h1 class=&quot;computer&quot; &gt;Game $currentGame.number&lt;/h1&gt;
+          &lt;h2&gt;$currentGame.name&lt;/h2&gt;
+&lt;/header&gt;</tw-passagedata><tw-passagedata pid="15" name="sealButton" tags="nobr" position="600,225" size="100,100">&lt;div class=&quot;sealBtn-container&quot;&gt;
     &lt;&lt;button [img[&quot;../assets/img/LL_wax_seal.png&quot;]]&gt;&gt;
       &lt;&lt;goto $nextpass&gt;&gt;
         &lt;&lt;/button&gt;&gt;
-        &lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="intro1" tags="nobr" position="475,225" size="100,100">&lt;&lt;set $prevpass to &quot;landing&quot;&gt;&gt;
+        &lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="intro1" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $prevpass to &quot;landing&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;intro1&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game1-landing&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateIntro&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="intro1-text" tags="nobr" position="600,225" size="100,100">&lt;&lt;timed 0.2s&gt;&gt;
+&lt;&lt;include &quot;_templateIntro&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="intro1-text" tags="nobr" position="850,225" size="100,100">&lt;&lt;timed 0.2s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 &lt;p&gt;Hello&lt;/p&gt;
@@ -336,30 +375,22 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Start&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="game1-landing" tags="" position="725,225" size="100,100">&lt;&lt;set $prevpass to &quot;intro1&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="game1-landing" tags="nobr" position="975,225" size="100,100">&lt;&lt;set $prevpass to &quot;intro1&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game1-landing&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game1-intro&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;white eyes&quot;&gt;&gt;
-&lt;main class=&quot;landing flex-col-cen&quot;&gt;
-  &lt;h1&gt;Game 1&lt;/h1&gt;
-  &lt;h2&gt;And You Are?&lt;/h2&gt;
-&lt;&lt;button &quot;Begin&quot;&gt;&gt;
-    &lt;&lt;goto $nextpass&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-   
-&lt;/main&gt;
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="game1-intro" tags="nobr" position="850,225" size="100,100">&lt;&lt;set $prevpass to &quot;game1-landing&quot;&gt;&gt;
+&lt;&lt;set $currentGame = $games[1]&gt;&gt;
+&lt;&lt;include &quot;_templateGameLanding&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="game1-intro" tags="nobr" position="1100,225" size="100,100">&lt;&lt;set $prevpass to &quot;game1-landing&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game1-intro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game1&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;white&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="game1-intro-text" tags="nobr" position="975,225" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+
+
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="game1-intro-text" tags="nobr" position="1225,225" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;p class=&quot;bold&quot;&gt;GAME 1: And You Are?&lt;/p&gt;
-&lt;div id=&quot;msgMount&quot;&gt;
-&lt;/div&gt;
+
+
 &lt;p&gt;Welcome to ‘And You Are?’ &lt;/p&gt;
 &lt;p&gt;This game is a bit like heads down thumbs up - but we’ve changed it!&lt;/p&gt;
 &lt;p&gt;You will place your head down on the desk&lt;/p&gt;
@@ -371,11 +402,11 @@ setup.addPlaceholder = () => {
 &lt;p&gt;Ready? Then get your heads on the table and let’s begin! &lt;/p&gt;
 &lt;&lt;button &quot;Ready&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="game1" tags="nobr" position="1100,225" size="100,100">&lt;&lt;set $prevpass = &quot;game1-intro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="game1" tags="nobr" position="100,350" size="100,100">&lt;&lt;set $prevpass = &quot;game1-intro&quot;&gt;&gt;
 &lt;&lt;set $pass = &quot;game1&quot;&gt;&gt;
 &lt;&lt;set $nextpass = &quot;game1-outro&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;white&quot;&gt;&gt;
+&lt;&lt;addclass &quot;body&quot; &quot;white eyes&quot;&gt;&gt;
 
 &lt;&lt;if $statementsGame1 is undefined&gt;&gt;
 &lt;&lt;set $statementsGame1 = [
@@ -396,24 +427,24 @@ setup.addPlaceholder = () => {
 &lt;&lt;set $statementIndexGame1 = 0&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;main&gt;
+&lt;main class=&quot;game1&quot;&gt;
 
 &lt;&lt;include &quot;game1-content&quot;&gt;&gt;
 
 &lt;/main&gt;
 
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="game1-content" tags="nobr" position="1225,225" size="100,100">&lt;div id=&quot;gameArea&quot;&gt;
+&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="game1-content" tags="nobr" position="225,350" size="100,100">&lt;div id=&quot;gameArea1&quot;&gt;
 
     &lt;div class=&quot;statement&quot;&gt;
       &lt;p&gt;  &lt;&lt;= $statementsGame1[$statementIndexGame1]&gt;&gt;&lt;/p&gt;
     &lt;/div&gt;
 
-    &lt;div class=&quot;buttons&quot;&gt;
+    &lt;div class=&quot;buttons-container&quot;&gt;
 
     &lt;&lt;if $statementIndexGame1 gt 0&gt;&gt;
         &lt;&lt;button &quot;Back&quot;&gt;&gt;
             &lt;&lt;set $statementIndexGame1--&gt;&gt;
-            &lt;&lt;replace &quot;#gameArea&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#gameArea1&quot;&gt;&gt;
                 &lt;&lt;include &quot;game1-content&quot;&gt;&gt;
             &lt;&lt;/replace&gt;&gt;
         &lt;&lt;/button&gt;&gt;
@@ -423,28 +454,31 @@ setup.addPlaceholder = () => {
 
         &lt;&lt;button &quot;Next&quot;&gt;&gt;
             &lt;&lt;set $statementIndexGame1++&gt;&gt;
-            &lt;&lt;replace &quot;#gameArea&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#gameArea1&quot;&gt;&gt;
                 &lt;&lt;include &quot;game1-content&quot;&gt;&gt;
             &lt;&lt;/replace&gt;&gt;
         &lt;&lt;/button&gt;&gt;
 
     &lt;&lt;else&gt;&gt;
 
-        [[Finish-&gt;$nextpass]]
+        &lt;&lt;button &quot;Finish&quot;&gt;&gt;
+           &lt;&lt;goto $nextpass&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+
+      
 
     &lt;&lt;/if&gt;&gt;
 
     &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="game1-outro" tags="nobr" position="100,350" size="100,100">&lt;&lt;set $prevpass to &quot;game1&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="game1-outro" tags="nobr" position="350,350" size="100,100">&lt;&lt;set $prevpass to &quot;game1&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game1-outro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game2-landing&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;white&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="game1-outro-text" tags="nobr" position="225,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;addclass &quot;body&quot; &quot;lime&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="game1-outro-text" tags="nobr" position="475,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;p class=&quot;bold&quot;&gt;GAME 1: And You Are?&lt;/p&gt;
 &lt;div id=&quot;msgMount&quot;&gt;
 &lt;/div&gt;
 &lt;p&gt;Thanks for playing. &lt;/p&gt;
@@ -457,30 +491,21 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Next&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="game2-landing" tags="" position="350,350" size="100,100">&lt;&lt;set $prevpass to &quot;game1-outro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="game2-landing" tags="nobr" position="600,350" size="100,100">&lt;&lt;set $prevpass to &quot;game1-outro&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game2-landing&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game2-intro&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;main class=&quot;landing flex-col-cen&quot;&gt;
-  &lt;h1&gt;Game 2&lt;/h1&gt;
-  &lt;h2&gt;This or That.&lt;/h2&gt;
-&lt;&lt;button &quot;Begin&quot;&gt;&gt;
-    &lt;&lt;goto $nextpass&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-   
-&lt;/main&gt;
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="game2-intro" tags="nobr" position="475,350" size="100,100">&lt;&lt;set $prevpass to &quot;game2-landing&quot;&gt;&gt;
+&lt;&lt;set $currentGame = $games[2]&gt;&gt;
+&lt;&lt;include &quot;_templateGameLanding&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="game2-intro" tags="nobr" position="725,350" size="100,100">&lt;&lt;set $prevpass to &quot;game2-landing&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game2-intro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game2&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="game2-intro-text" tags="nobr" position="600,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="game2-intro-text" tags="nobr" position="850,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;p class=&quot;bold&quot;&gt;GAME 2: This or That&lt;/p&gt;
-&lt;div id=&quot;msgMount&quot;&gt;
-&lt;/div&gt;
+
 &lt;p&gt;Welcome to This or That, where you will be faced with a series of statements that you may either agree or disagree with! &lt;/p&gt;
 &lt;br/&gt;
 &lt;p&gt;If you AGREE you stand up and if you DISAGREE then you stay sat down... Simple. &lt;/p&gt;
@@ -494,7 +519,7 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Ready&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="game2" tags="nobr" position="725,350" size="100,100">&lt;&lt;set $prevpass = &quot;game2-intro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="game2" tags="nobr" position="975,350" size="100,100">&lt;&lt;set $prevpass = &quot;game2-intro&quot;&gt;&gt;
 &lt;&lt;set $pass = &quot;game2&quot;&gt;&gt;
 &lt;&lt;set $nextpass = &quot;game2-outro&quot;&gt;&gt;
 
@@ -560,7 +585,7 @@ setup.addPlaceholder = () => {
 
 &lt;/main&gt;
 
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="game2-content" tags="nobr" position="850,350" size="100,100">&lt;div id=&quot;gameArea&quot;&gt;
+&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="game2-content" tags="nobr" position="1100,350" size="100,100">&lt;div id=&quot;gameArea&quot;&gt;
 
    &lt;div class=&quot;statement&quot;&gt;
     &lt;&lt;= $statementsGame2[$statementIndexGame2].question &gt;&gt;
@@ -615,17 +640,14 @@ setup.addPlaceholder = () => {
 
 &lt;&lt;addclass &quot;.left&quot; $statementsGame2[$statementIndexGame2].leftClass&gt;&gt;
 &lt;&lt;addclass &quot;.right&quot; $statementsGame2[$statementIndexGame2].rightClass&gt;&gt;
-&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="game2-outro" tags="nobr" position="975,350" size="100,100">&lt;&lt;set $prevpass to &quot;game2&quot;&gt;&gt;
+&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="game2-outro" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $prevpass to &quot;game2&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game2-outro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game3-landing&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="game2-outro-text" tags="nobr" position="1100,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="game2-outro-text" tags="nobr" position="100,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;p class=&quot;bold&quot;&gt;GAME 2: This or That&lt;/p&gt;
-&lt;div id=&quot;msgMount&quot;&gt;
-&lt;/div&gt;
 &lt;p&gt;Thank you for playing This or That. &lt;/p&gt;
 &lt;p&gt;Your time here will be filled with making decisions&lt;/p&gt;
 &lt;p&gt;Sometimes you will agree with others, sometimes you won’t.&lt;/p&gt; 
@@ -638,30 +660,21 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Next&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="game3-landing" tags="" position="1225,350" size="100,100">&lt;&lt;set $prevpass to &quot;game3-outro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="game3-landing" tags="nobr" position="225,475" size="100,100">&lt;&lt;set $prevpass to &quot;game3-outro&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game3-landing&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game3-intro&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;main class=&quot;landing flex-col-cen&quot;&gt;
-  &lt;h1&gt;Game 3&lt;/h1&gt;
-  &lt;h2&gt;Memory&lt;/h2&gt;
-&lt;&lt;button &quot;Begin&quot;&gt;&gt;
-    &lt;&lt;goto $nextpass&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-   
-&lt;/main&gt;
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="game3-intro" tags="nobr" position="100,475" size="100,100">&lt;&lt;set $prevpass to &quot;game3-landing&quot;&gt;&gt;
+&lt;&lt;set $currentGame = $games[3]&gt;&gt;
+&lt;&lt;include &quot;_templateGameLanding&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="game3-intro" tags="nobr" position="350,475" size="100,100">&lt;&lt;set $prevpass to &quot;game3-landing&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game3-intro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game3&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="game3-intro-text" tags="nobr" position="225,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="game3-intro-text" tags="nobr" position="475,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;p class=&quot;bold&quot;&gt;GAME 3: Memory&lt;/p&gt;
-&lt;div id=&quot;msgMount&quot;&gt;
-&lt;/div&gt;
+
 &lt;p&gt;Knowing where you need to be and when is going to help you here. &lt;/p&gt;
 &lt;p&gt;So memorising your timetable is going to be super helpful.&lt;/p&gt; 
 &lt;p&gt;Don’t worry if that feels daunting?&lt;/p&gt;
@@ -676,7 +689,7 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Ready&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="game3" tags="nobr" position="350,475" size="100,100">&lt;&lt;set $prevpass = &quot;game3-intro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="game3" tags="nobr" position="600,475" size="100,100">&lt;&lt;set $prevpass = &quot;game3-intro&quot;&gt;&gt;
 &lt;&lt;set $pass = &quot;game3&quot;&gt;&gt;
 &lt;&lt;set $nextpass = &quot;game3-outro&quot;&gt;&gt;
 
@@ -686,99 +699,196 @@ setup.addPlaceholder = () => {
 &lt;&lt;if $roundsGame3 is undefined&gt;&gt;
 &lt;&lt;set $roundsGame3 = [
 {
-    image: &quot;images/game2/round1.jpg&quot;,
-    answer: &quot;images/game2/round1-answer.jpg&quot;
+    images: [&quot;../assets/img/game3/square.png&quot;,&quot;../assets/img/game3/rectangle.jpg&quot;, &quot;../assets/img/game3/triangle.png&quot;, &quot;../assets/img/game3/oblong.png&quot;, &quot;../assets/img/game3/circle.png&quot; ], 
+    questions: [
+        {question:&quot;1. What colour was the triangle?&quot;,
+    answer: &quot;answer&quot;,
+},
+{question: &quot;2. What colour was the circle?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;3. How many rectangles were there?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;4. Which shape was red?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;5. Which shape was green?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;6. How many squares were there?&quot;,
+answer: &quot;answer&quot;},
+    ]
 },
 {
-    image: &quot;images/game2/round2.jpg&quot;,
-    answer: &quot;images/game2/round2-answer.jpg&quot;
+    images: [&quot;../assets/img/game3/1.png&quot;,&quot;../assets/img/game3/2.png&quot;, &quot;../assets/img/game3/3.png&quot;, &quot;../assets/img/game3/4.png&quot;, &quot;../assets/img/game3/5.png&quot; ], 
+    questions: [
+        {question:&quot;1.What colour was the book?&quot;,
+    answer: &quot;answer&quot;,
+},
+{question: &quot;2. Where does the box need to be returned to?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;3. What class is the book from?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;4. What colour is the sharpener?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;5. Was the pen black or blue?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;6. What colour was the tape measure? &quot;,
+answer: &quot;answer&quot;},
+    ]
 },
 {
-    image: &quot;images/game2/round3.jpg&quot;,
-    answer: &quot;images/game2/round3-answer.jpg&quot;
+    images: [&quot;../assets/img/game3/6.png&quot;,&quot;../assets/img/game3/7.png&quot;, &quot;../assets/img/game3/8.png&quot;, &quot;../assets/img/game3/9.png&quot;, &quot;../assets/img/game3/10.png&quot; ], 
+    questions: [
+        {question:&quot;1.What notebook had square lines?&quot;,
+    answer: &quot;answer&quot;,
+},
+{question: &quot;2. What were the pictures in the fourth book?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;3. What colour was the bookmark?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;4. Did any notebook have writing in?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;5. Which notebook had metal rings?&quot;,
+answer: &quot;answer&quot;},
+{question: &quot;6. Which notebook had stickers on the cover? &quot;,
+answer: &quot;answer&quot;},
+    ]
 },
 {
-    image: &quot;images/game2/round4.jpg&quot;,
-    answer: &quot;images/game2/round4-answer.jpg&quot;
-}
+    images: [&quot;../assets/img/game3/Timetable1.png&quot;,&quot;../assets/img/game3/Timetable2.png&quot;, &quot;../assets/img/game3/Timetable3.png&quot;], 
+    questions: [
+        {question:&quot;1. What was the Blue timetable?&quot;,
+    answer: &quot;answer&quot;,
+},
+
+    ]
+},
 ]&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if $roundIndexGame3 is undefined&gt;&gt;
 &lt;&lt;set $roundIndexGame3 = 0&gt;&gt;
-&lt;&lt;set $game3Stage = &quot;image&quot;&gt;&gt;
+&lt;&lt;set $game3Stage = &quot;images&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;main&gt;
-
 &lt;&lt;include &quot;game3-content&quot;&gt;&gt;
 
 &lt;/main&gt;
 
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="game3-content" tags="nobr" position="475,475" size="100,100">&lt;&lt;set _round = $roundsGame3[$roundIndexGame3]&gt;&gt;
+&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="game3-content" tags="nobr" position="725,475" size="100,100">&lt;&lt;set _round = $roundsGame3[$roundIndexGame3]&gt;&gt;
 
-&lt;div id=&quot;gameArea&quot;&gt;
+&lt;div id=&quot;gameArea3&quot;&gt;
 
 &lt;&lt;switch $game3Stage&gt;&gt;
 
-&lt;&lt;case &quot;image&quot;&gt;&gt;
+&lt;!-- ========================================================= --&gt;
+&lt;&lt;case &quot;images&quot;&gt;&gt;
 
-&lt;h2&gt;Round &lt;&lt;= $roundIndexGame3 + 1&gt;&gt;&lt;/h2&gt;
+&lt;h1&gt;Round &lt;&lt;= $roundIndexGame3 + 1&gt;&gt;&lt;/h1&gt;
 
-&lt;img src=&quot;&lt;&lt;=_round.image&gt;&gt;&quot; width=&quot;900&quot;&gt;
+&lt;div class=&quot;game3-images&quot;&gt;
 
-&lt;p&gt;&lt;strong&gt;Show this image for 10 seconds.&lt;/strong&gt;&lt;/p&gt;
+&lt;&lt;for _img range _round.images&gt;&gt;
+    &lt;&lt;capture _img&gt;&gt;
+    &lt;div class=&quot;memory-image&quot;&gt;
+    [img[_img]]
+    &lt;/div&gt;
+    &lt;&lt;/capture&gt;&gt;
+&lt;&lt;/for&gt;&gt;
 
-&lt;&lt;timed 10s&gt;&gt;
-    &lt;&lt;replace &quot;#gameArea&quot;&gt;&gt;
-        &lt;&lt;set $game3Stage = &quot;check&quot;&gt;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Time remaining:
+&lt;span id=&quot;memoryTimer&quot;&gt;10&lt;/span&gt;
+&lt;/p&gt;
+
+
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;set $game3Stage = &quot;questions&quot;&gt;&gt;
+    &lt;&lt;replace &quot;#gameArea3&quot;&gt;&gt;
         &lt;&lt;include &quot;game3-content&quot;&gt;&gt;
     &lt;&lt;/replace&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;case &quot;check&quot;&gt;&gt;
+&lt;!-- ========================================================= --&gt;
+&lt;&lt;case &quot;questions&quot;&gt;&gt;
 
-&lt;h2&gt;Round &lt;&lt;= $roundIndexGame3 + 1&gt;&gt;&lt;/h2&gt;
+&lt;h1&gt;Round &lt;&lt;= $roundIndexGame3 + 1&gt;&gt;: Questions&lt;/h1&gt;
+&lt;br/&gt;
+&lt;ul&gt;
+    &lt;&lt;for _q range _round.questions&gt;&gt;
+    &lt;li&gt;&lt;p&gt;&lt;&lt;= _q.question&gt;&gt;&lt;/p&gt;&lt;/li&gt;
+    &lt;&lt;/for&gt;&gt;
+&lt;/ul&gt;
+&lt;br/&gt;
+&lt;div id=&quot;revealButton&quot;&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Teacher, check the answers.&lt;/strong&gt;&lt;/p&gt;
+&lt;&lt;timed 5s&gt;&gt;
 
-&lt;&lt;button &quot;Reveal Answer&quot;&gt;&gt;
-    &lt;&lt;set $game3Stage = &quot;answer&quot;&gt;&gt;
-    &lt;&lt;replace &quot;#gameArea&quot;&gt;&gt;
+&lt;&lt;replace &quot;#revealButton&quot;&gt;&gt;
+&lt;h2&gt;Teacher, check answers.&lt;/h2&gt;
+&lt;br/&gt;
+&lt;&lt;button &quot;Reveal answers&quot;&gt;&gt;
+
+    &lt;&lt;set $game3Stage = &quot;answers&quot;&gt;&gt;
+
+    &lt;&lt;replace &quot;#gameArea3&quot;&gt;&gt;
+        &lt;&lt;include &quot;game3-content&quot;&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;
+
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;/replace&gt;&gt;
+
+&lt;&lt;/timed&gt;&gt;
+
+&lt;!-- ========================================================= --&gt;
+&lt;&lt;case &quot;answers&quot;&gt;&gt;
+
+&lt;h1&gt;Round &lt;&lt;= $roundIndexGame3 + 1&gt;&gt;: Questions&lt;/h1&gt;
+&lt;br/&gt;
+&lt;ul&gt;
+
+&lt;&lt;for _q range _round.questions&gt;&gt;
+&lt;&lt;capture _q&gt;&gt;
+&lt;li&gt;
+   &lt;p&gt; &lt;&lt;= _q.question&gt;&gt;  &lt;span class=&quot;answer&quot;&gt; &lt;strong&gt;Answer:&lt;/strong&gt; &lt;&lt;= _q.answer&gt;&gt;&lt;/span&gt;
+   &lt;/p&gt;
+&lt;/li&gt;
+&lt;&lt;/capture&gt;&gt;
+&lt;&lt;/for&gt;&gt;
+&lt;/ul&gt;
+
+&lt;&lt;if $roundIndexGame3 &lt; $roundsGame3.length - 1&gt;&gt;
+&lt;br/&gt;
+&lt;&lt;timed 5s&gt;&gt;
+&lt;&lt;button &quot;Next Round&quot;&gt;&gt;
+    &lt;&lt;set $roundIndexGame3++&gt;&gt;
+    &lt;&lt;set $game3Stage = &quot;images&quot;&gt;&gt;
+
+    &lt;&lt;replace &quot;#gameArea3&quot;&gt;&gt;
         &lt;&lt;include &quot;game3-content&quot;&gt;&gt;
     &lt;&lt;/replace&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-
-&lt;&lt;case &quot;answer&quot;&gt;&gt;
-
-&lt;h2&gt;Round &lt;&lt;= $roundIndexGame3 + 1&gt;&gt; Answer&lt;/h2&gt;
-
-&lt;img src=&quot;&lt;&lt;=_round.answer&gt;&gt;&quot; width=&quot;900&quot;&gt;
-
-&lt;&lt;if $roundIndexGame3 &lt; $roundsGame3.length - 1&gt;&gt;
-
-    &lt;&lt;button &quot;Next&quot;&gt;&gt;
-        &lt;&lt;set $roundIndexGame3++&gt;&gt;
-        &lt;&lt;set $game3Stage = &quot;image&quot;&gt;&gt;
-        &lt;&lt;replace &quot;#gameArea&quot;&gt;&gt;
-            &lt;&lt;include &quot;game3-content&quot;&gt;&gt;
-        &lt;&lt;/replace&gt;&gt;
-    &lt;&lt;/button&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;else&gt;&gt;
 
-    [[Next-&gt;$nextpass]]
+&lt;br/&gt;
+&lt;&lt;button &quot;Finish&quot;&gt;&gt;
+  &lt;&lt;goto $nextpass&gt;&gt;
+&lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;/switch&gt;&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="35" name="game3-outro" tags="nobr" position="600,475" size="100,100">&lt;&lt;set $prevpass to &quot;game3&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="37" name="game3-outro" tags="nobr" position="850,475" size="100,100">&lt;&lt;set $prevpass to &quot;game3&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game3-outro&quot;&gt;&gt;
-&lt;&lt;set $nextpass to &quot;game3&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;game4-landing&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="game3-outro-text" tags="nobr" position="725,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="game3-outro-text" tags="nobr" position="975,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 &lt;p class=&quot;bold&quot;&gt;GAME 3: Memory&lt;/p&gt;
@@ -795,25 +905,18 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Next&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="game4-landing" tags="" position="850,475" size="100,100">&lt;&lt;set $prevpass to &quot;game3-outro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="game4-landing" tags="" position="1100,475" size="100,100">&lt;&lt;set $prevpass to &quot;game3-outro&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game4-landing&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game4-intro&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;main class=&quot;landing flex-col-cen&quot;&gt;
-  &lt;h1&gt;Game 4&lt;/h1&gt;
-  &lt;h2&gt;The Tour Game&lt;/h2&gt;
-&lt;&lt;button &quot;Begin&quot;&gt;&gt;
-    &lt;&lt;goto $nextpass&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-   
-&lt;/main&gt;
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="game4-intro" tags="nobr" position="975,475" size="100,100">&lt;&lt;set $prevpass to &quot;game4-landing&quot;&gt;&gt;
+&lt;&lt;set $currentGame = $games[4]&gt;&gt;
+&lt;&lt;include &quot;_templateGameLanding&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="game4-intro" tags="nobr" position="1225,475" size="100,100">&lt;&lt;set $prevpass to &quot;game4-landing&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game4-intro&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;game4&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="game4-intro-text" tags="nobr" position="1100,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="game4-intro-text" tags="nobr" position="100,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 &lt;p class=&quot;bold&quot;&gt;GAME 4: The Tour Game&lt;/p&gt;
@@ -834,10 +937,10 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Ready&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="game4" tags="nobr" position="1225,475" size="100,100">&lt;&lt;set $prevpass = &quot;game4-intro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="game4" tags="nobr" position="225,600" size="100,100">&lt;&lt;set $prevpass = &quot;game4-intro&quot;&gt;&gt;
 &lt;&lt;set $pass = &quot;game4&quot;&gt;&gt;
 &lt;&lt;set $nextpass = &quot;game4-outro&quot;&gt;&gt;
-
+&lt;&lt;addclass &quot;body&quot; &quot;school&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
 
@@ -847,8 +950,7 @@ setup.addPlaceholder = () => {
 
 &lt;/main&gt;
 
-&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="game4-content" tags="nobr" position="100,600" size="100,100">content
-&lt;&lt;include &quot;game4-codeword&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="game4-codeword" tags="nobr" position="225,600" size="100,100">&lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
+&lt;&lt;include &quot;navbuttonsb&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="game4-content" tags="nobr" position="350,600" size="100,100">&lt;&lt;include &quot;game4-codeword&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="game4-codeword" tags="nobr" position="475,600" size="100,100">&lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
 
 &lt;div class=&quot;codeinput&quot;&gt;
   &lt;&lt;textbox &quot;$codeword&quot; &quot;&quot;&gt;&gt;
@@ -877,12 +979,12 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
 
-&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="game4-outro" tags="nobr" position="350,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4&quot;&gt;&gt;
+&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="game4-outro" tags="nobr" position="600,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game4-outro&quot;&gt;&gt;
-&lt;&lt;set $nextpass to &quot;game4&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;end&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="game4-outro-text" tags="nobr" position="475,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="game4-outro-text" tags="nobr" position="725,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 &lt;p class=&quot;bold&quot;&gt;GAME 4: Outro&lt;/p&gt;
@@ -905,7 +1007,7 @@ setup.addPlaceholder = () => {
 &lt;br/&gt;
 &lt;&lt;button &quot;Next&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="end" tags="nobr" position="600,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4-outro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="end" tags="nobr" position="850,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4-outro&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;end&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;end&quot;&gt;&gt;
 

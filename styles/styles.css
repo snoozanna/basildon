@@ -402,7 +402,7 @@ body.lime{
   }
 
 
-/* lime  */
+/* white  */
 
 
 
@@ -437,6 +437,31 @@ body.white.eyes{
   }
 
 
+/* school  */
+body.school{
+  background-color: var(--maroon);
+  background-image: url(../assets/img/school.jpg);
+  color:black;
+  background-size: cover;
+  }
+  
+  body.school button {
+    background: var(--black);
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.school .nav-btn-container > button{
+    background: var(--white);
+    color: var(--black);
+  }
+  
+  body.school button:hover,
+  body.school button:focus,
+  body.school button:active {
+    background-color: var(--pink);
+    color: var(--white);
+  }
 
 /* intro  */
 
@@ -569,6 +594,9 @@ input[type="text"]::placeholder{
     gap: 0.5rem;
     align-items: end;
     justify-content: space-around;
+    width: max-content;
+    padding: 2rem;
+    background: beige;
   
 }
 
@@ -766,7 +794,7 @@ opacity: 1;
  }
 
 
- main.landing > h1{
+ main.landing h1.computer{
   /* font-size: 3rem; */
   font-size: clamp(1rem, 7.5vw, 10rem);
   white-space: nowrap;
@@ -874,17 +902,48 @@ align-items: start;
     animation: none;
   }
 
-
-  
-
-
-
   
   @keyframes fade2 {
     0%, 40% { opacity: 0; }
     50%, 100% { opacity: 1; }
   }
 
+/* GAME HEADER  */
+
+header.game-intro-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header.game-intro-header > h1{
+  font-size: 5rem;
+}
+
+/* GAME 1  */
+main.game1{
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#gameArea1 {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #681038;
+  padding: 4rem;
+  color: white;
+}
+
+#gameArea1 > .buttons-container{
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
 
 /* GAME 2  */
 
@@ -985,6 +1044,30 @@ align-items: start;
   text-align: center;
 }
 
+/* GAME 3  */
+
+#gameArea3{
+/* max-height: 80vh; */
+}
+
+.game3-images{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap:2rem;
+
+}
+
+.game3-images > .memory-image{
+  max-width: 30%;
+}
+
+span.answer{
+  color: var(--pink)
+}
+
+/* GAME 4  */
 
 
 

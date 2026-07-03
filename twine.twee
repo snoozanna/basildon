@@ -96,6 +96,26 @@ setup.addPlaceholder = () => {
 <<cacheaudio "notification" "../assets/sound/Notification.wav">>
 <<cacheaudio "ping" "../assets/sound/ping1.mp3">>
 <<cacheaudio "ticker" "../assets/sound/ticker.mp3">>
+<<set $games = {
+    1: {
+        number: 1,
+        name: "And you are?"
+    },
+    2: {
+        number: 2,
+        name: "This or That"
+    },
+    3: {
+        number: 3,
+        name: "Memory"
+    },
+    4: {
+        number: 4,
+        name: "The Tour Game"
+    }
+}>>
+
+<<set $currentGame = $games[1]>>
 
 <script>
     const link = document.createElement("link");
@@ -249,7 +269,25 @@ setup.addPlaceholder = () => {
 </main> 
 <<include "navbuttonsb">>
 
+:: _templateGameLanding[nobr]
+<<addclass "body" "lime">>
+<main class="landing flex-col-cen">
+
+     <div class="landing-title-container">
+          <h1 class="computer" >Game $currentGame.number</h1>
+          <h2>$currentGame.name</h2>
+     </div>
+
+<<button "Begin">>
+    <<goto $nextpass>>
+<</button>>
+   
+</main>
+<<include "navbuttonsb">>
+
 :: _templateStory [nobr]
+<<addclass "body" "lime">>
+<<include "game-intro-header">>
 
 <main>
 <div id="audio"></div>
@@ -273,6 +311,11 @@ setup.addPlaceholder = () => {
 </main>
 <<include "navbuttonsb">>
 
+:: game-intro-header[nobr]
+<header class="game-intro-header">
+ <h1 class="computer" >Game $currentGame.number</h1>
+          <h2>$currentGame.name</h2>
+</header>
 
 :: sealButton [nobr]
 <div class="sealBtn-container">
@@ -327,37 +370,32 @@ setup.addPlaceholder = () => {
     <</button>>
 
 
-:: game1-landing
+:: game1-landing [nobr]
 <<set $prevpass to "intro1">>
 <<set $pass to "game1-landing">>
 <<set $nextpass to "game1-intro">>
 <<audio ":all" "stop">>
-<<addclass "body" "white eyes">>
-<main class="landing flex-col-cen">
-  <h1>Game 1</h1>
-  <h2>And You Are?</h2>
-<<button "Begin">>
-    <<goto $nextpass>>
-<</button>>
-   
-</main>
-<<include "navbuttonsb">>
+<<set $currentGame = $games[1]>>
+<<include "_templateGameLanding">>
+
+
+
 
 :: game1-intro [nobr]
 <<set $prevpass to "game1-landing">>
 <<set $pass to "game1-intro">>
 <<set $nextpass to "game1">>
 <<audio ":all" "stop">>
-<<addclass "body" "white">>
+
+
 <<include "_templateStory">>
 
 :: game1-intro-text [nobr]
   <<timed 0.1s>>
     <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
-<p class="bold">GAME 1: And You Are?</p>
-<div id="msgMount">
-</div>
+
+
 <p>Welcome to ‘And You Are?’ </p>
 <p>This game is a bit like heads down thumbs up - but we’ve changed it!</p>
 <p>You will place your head down on the desk</p>
@@ -377,7 +415,7 @@ setup.addPlaceholder = () => {
 <<set $pass = "game1">>
 <<set $nextpass = "game1-outro">>
 <<audio ":all" "stop">>
-<<addclass "body" "white">>
+<<addclass "body" "white eyes">>
 
 <<if $statementsGame1 is undefined>>
 <<set $statementsGame1 = [
@@ -398,7 +436,7 @@ setup.addPlaceholder = () => {
 <<set $statementIndexGame1 = 0>>
 <</if>>
 
-<main>
+<main class="game1">
 
 <<include "game1-content">>
 
@@ -408,18 +446,18 @@ setup.addPlaceholder = () => {
 
 :: game1-content [nobr]
 
-<div id="gameArea">
+<div id="gameArea1">
 
     <div class="statement">
       <p>  <<= $statementsGame1[$statementIndexGame1]>></p>
     </div>
 
-    <div class="buttons">
+    <div class="buttons-container">
 
     <<if $statementIndexGame1 gt 0>>
         <<button "Back">>
             <<set $statementIndexGame1-->>
-            <<replace "#gameArea">>
+            <<replace "#gameArea1">>
                 <<include "game1-content">>
             <</replace>>
         <</button>>
@@ -429,14 +467,18 @@ setup.addPlaceholder = () => {
 
         <<button "Next">>
             <<set $statementIndexGame1++>>
-            <<replace "#gameArea">>
+            <<replace "#gameArea1">>
                 <<include "game1-content">>
             <</replace>>
         <</button>>
 
     <<else>>
 
-        [[Finish->$nextpass]]
+        <<button "Finish">>
+           <<goto $nextpass>>
+        <</button>>
+
+      
 
     <</if>>
 
@@ -449,14 +491,13 @@ setup.addPlaceholder = () => {
 <<set $pass to "game1-outro">>
 <<set $nextpass to "game2-landing">>
 <<audio ":all" "stop">>
-<<addclass "body" "white">>
+<<addclass "body" "lime">>
 <<include "_templateStory">>
 
 :: game1-outro-text [nobr]
   <<timed 0.1s>>
     <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
-<p class="bold">GAME 1: And You Are?</p>
 <div id="msgMount">
 </div>
 <p>Thanks for playing. </p>
@@ -471,21 +512,14 @@ setup.addPlaceholder = () => {
     <<goto $nextpass>>
     <</button>>
 
-:: game2-landing
+:: game2-landing [nobr]
 <<set $prevpass to "game1-outro">>
 <<set $pass to "game2-landing">>
 <<set $nextpass to "game2-intro">>
 <<audio ":all" "stop">>
 
-<main class="landing flex-col-cen">
-  <h1>Game 2</h1>
-  <h2>This or That.</h2>
-<<button "Begin">>
-    <<goto $nextpass>>
-<</button>>
-   
-</main>
-<<include "navbuttonsb">>
+<<set $currentGame = $games[2]>>
+<<include "_templateGameLanding">>
 
 :: game2-intro [nobr]
 <<set $prevpass to "game2-landing">>
@@ -499,9 +533,7 @@ setup.addPlaceholder = () => {
   <<timed 0.1s>>
     <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
-<p class="bold">GAME 2: This or That</p>
-<div id="msgMount">
-</div>
+
 <p>Welcome to This or That, where you will be faced with a series of statements that you may either agree or disagree with! </p>
 <br/>
 <p>If you AGREE you stand up and if you DISAGREE then you stay sat down... Simple. </p>
@@ -658,9 +690,6 @@ setup.addPlaceholder = () => {
   <<timed 0.1s>>
     <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
-<p class="bold">GAME 2: This or That</p>
-<div id="msgMount">
-</div>
 <p>Thank you for playing This or That. </p>
 <p>Your time here will be filled with making decisions</p>
 <p>Sometimes you will agree with others, sometimes you won’t.</p> 
@@ -676,21 +705,14 @@ setup.addPlaceholder = () => {
     <</button>>
 
 
-:: game3-landing
+:: game3-landing [nobr]
 <<set $prevpass to "game3-outro">>
 <<set $pass to "game3-landing">>
 <<set $nextpass to "game3-intro">>
 <<audio ":all" "stop">>
 
-<main class="landing flex-col-cen">
-  <h1>Game 3</h1>
-  <h2>Memory</h2>
-<<button "Begin">>
-    <<goto $nextpass>>
-<</button>>
-   
-</main>
-<<include "navbuttonsb">>
+<<set $currentGame = $games[3]>>
+<<include "_templateGameLanding">>
 
 :: game3-intro [nobr]
 <<set $prevpass to "game3-landing">>
@@ -704,9 +726,7 @@ setup.addPlaceholder = () => {
   <<timed 0.1s>>
     <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
-<p class="bold">GAME 3: Memory</p>
-<div id="msgMount">
-</div>
+
 <p>Knowing where you need to be and when is going to help you here. </p>
 <p>So memorising your timetable is going to be super helpful.</p> 
 <p>Don’t worry if that feels daunting?</p>
@@ -735,91 +755,191 @@ setup.addPlaceholder = () => {
 <<if $roundsGame3 is undefined>>
 <<set $roundsGame3 = [
 {
-    image: "images/game2/round1.jpg",
-    answer: "images/game2/round1-answer.jpg"
+    images: ["../assets/img/game3/square.png","../assets/img/game3/rectangle.jpg", "../assets/img/game3/triangle.png", "../assets/img/game3/oblong.png", "../assets/img/game3/circle.png" ], 
+    questions: [
+        {question:"1. What colour was the triangle?",
+    answer: "answer",
+},
+{question: "2. What colour was the circle?",
+answer: "answer"},
+{question: "3. How many rectangles were there?",
+answer: "answer"},
+{question: "4. Which shape was red?",
+answer: "answer"},
+{question: "5. Which shape was green?",
+answer: "answer"},
+{question: "6. How many squares were there?",
+answer: "answer"},
+    ]
 },
 {
-    image: "images/game2/round2.jpg",
-    answer: "images/game2/round2-answer.jpg"
+    images: ["../assets/img/game3/1.png","../assets/img/game3/2.png", "../assets/img/game3/3.png", "../assets/img/game3/4.png", "../assets/img/game3/5.png" ], 
+    questions: [
+        {question:"1.What colour was the book?",
+    answer: "answer",
+},
+{question: "2. Where does the box need to be returned to?",
+answer: "answer"},
+{question: "3. What class is the book from?",
+answer: "answer"},
+{question: "4. What colour is the sharpener?",
+answer: "answer"},
+{question: "5. Was the pen black or blue?",
+answer: "answer"},
+{question: "6. What colour was the tape measure? ",
+answer: "answer"},
+    ]
 },
 {
-    image: "images/game2/round3.jpg",
-    answer: "images/game2/round3-answer.jpg"
+    images: ["../assets/img/game3/6.png","../assets/img/game3/7.png", "../assets/img/game3/8.png", "../assets/img/game3/9.png", "../assets/img/game3/10.png" ], 
+    questions: [
+        {question:"1.What notebook had square lines?",
+    answer: "answer",
+},
+{question: "2. What were the pictures in the fourth book?",
+answer: "answer"},
+{question: "3. What colour was the bookmark?",
+answer: "answer"},
+{question: "4. Did any notebook have writing in?",
+answer: "answer"},
+{question: "5. Which notebook had metal rings?",
+answer: "answer"},
+{question: "6. Which notebook had stickers on the cover? ",
+answer: "answer"},
+    ]
 },
 {
-    image: "images/game2/round4.jpg",
-    answer: "images/game2/round4-answer.jpg"
-}
+    images: ["../assets/img/game3/Timetable1.png","../assets/img/game3/Timetable2.png", "../assets/img/game3/Timetable3.png"], 
+    questions: [
+        {question:"1. What was the Blue timetable?",
+    answer: "answer",
+},
+
+    ]
+},
 ]>>
 <</if>>
 
 <<if $roundIndexGame3 is undefined>>
 <<set $roundIndexGame3 = 0>>
-<<set $game3Stage = "image">>
+<<set $game3Stage = "images">>
 <</if>>
 
 <main>
-
 <<include "game3-content">>
 
 </main>
 
 <<include "navbuttonsb">>
 
+
 :: game3-content [nobr]
+
+
 <<set _round = $roundsGame3[$roundIndexGame3]>>
 
-<div id="gameArea">
+<div id="gameArea3">
 
 <<switch $game3Stage>>
 
-<<case "image">>
+<!-- ========================================================= -->
+<<case "images">>
 
-<h2>Round <<= $roundIndexGame3 + 1>></h2>
+<h1>Round <<= $roundIndexGame3 + 1>></h1>
 
-<img src="<<=_round.image>>" width="900">
+<div class="game3-images">
 
-<p><strong>Show this image for 10 seconds.</strong></p>
+<<for _img range _round.images>>
+    <<capture _img>>
+    <div class="memory-image">
+    [img[_img]]
+    </div>
+    <</capture>>
+<</for>>
 
-<<timed 10s>>
-    <<replace "#gameArea">>
-        <<set $game3Stage = "check">>
+</div>
+
+<p>
+Time remaining:
+<span id="memoryTimer">10</span>
+</p>
+
+
+<<timed 3s>>
+    <<set $game3Stage = "questions">>
+    <<replace "#gameArea3">>
         <<include "game3-content">>
     <</replace>>
 <</timed>>
 
-<<case "check">>
+<!-- ========================================================= -->
+<<case "questions">>
 
-<h2>Round <<= $roundIndexGame3 + 1>></h2>
+<h1>Round <<= $roundIndexGame3 + 1>>: Questions</h1>
+<br/>
+<ul>
+    <<for _q range _round.questions>>
+    <li><p><<= _q.question>></p></li>
+    <</for>>
+</ul>
+<br/>
+<div id="revealButton"></div>
 
-<p><strong>Teacher, check the answers.</strong></p>
+<<timed 5s>>
 
-<<button "Reveal Answer">>
-    <<set $game3Stage = "answer">>
-    <<replace "#gameArea">>
+<<replace "#revealButton">>
+<h2>Teacher, check answers.</h2>
+<br/>
+<<button "Reveal answers">>
+
+    <<set $game3Stage = "answers">>
+
+    <<replace "#gameArea3">>
+        <<include "game3-content">>
+    <</replace>>
+
+<</button>>
+
+<</replace>>
+
+<</timed>>
+
+<!-- ========================================================= -->
+<<case "answers">>
+
+<h1>Round <<= $roundIndexGame3 + 1>>: Questions</h1>
+<br/>
+<ul>
+
+<<for _q range _round.questions>>
+<<capture _q>>
+<li>
+   <p> <<= _q.question>>  <span class="answer"> <strong>Answer:</strong> <<= _q.answer>></span>
+   </p>
+</li>
+<</capture>>
+<</for>>
+</ul>
+
+<<if $roundIndexGame3 < $roundsGame3.length - 1>>
+<br/>
+<<timed 5s>>
+<<button "Next Round">>
+    <<set $roundIndexGame3++>>
+    <<set $game3Stage = "images">>
+
+    <<replace "#gameArea3">>
         <<include "game3-content">>
     <</replace>>
 <</button>>
-
-<<case "answer">>
-
-<h2>Round <<= $roundIndexGame3 + 1>> Answer</h2>
-
-<img src="<<=_round.answer>>" width="900">
-
-<<if $roundIndexGame3 < $roundsGame3.length - 1>>
-
-    <<button "Next">>
-        <<set $roundIndexGame3++>>
-        <<set $game3Stage = "image">>
-        <<replace "#gameArea">>
-            <<include "game3-content">>
-        <</replace>>
-    <</button>>
+<</timed>>
 
 <<else>>
 
-    [[Next->$nextpass]]
+<br/>
+<<button "Finish">>
+  <<goto $nextpass>>
+<</button>>
 
 <</if>>
 
@@ -830,7 +950,7 @@ setup.addPlaceholder = () => {
 :: game3-outro [nobr]
 <<set $prevpass to "game3">>
 <<set $pass to "game3-outro">>
-<<set $nextpass to "game3">>
+<<set $nextpass to "game4-landing">>
 <<audio ":all" "stop">>
 
 <<include "_templateStory">>
@@ -862,15 +982,9 @@ setup.addPlaceholder = () => {
 <<set $nextpass to "game4-intro">>
 <<audio ":all" "stop">>
 
-<main class="landing flex-col-cen">
-  <h1>Game 4</h1>
-  <h2>The Tour Game</h2>
-<<button "Begin">>
-    <<goto $nextpass>>
-<</button>>
-   
-</main>
-<<include "navbuttonsb">>
+<<set $currentGame = $games[4]>>
+<<include "_templateGameLanding">>
+
 
 :: game4-intro [nobr]
 <<set $prevpass to "game4-landing">>
@@ -909,7 +1023,7 @@ setup.addPlaceholder = () => {
 <<set $prevpass = "game4-intro">>
 <<set $pass = "game4">>
 <<set $nextpass = "game4-outro">>
-
+<<addclass "body" "school">>
 <<audio ":all" "stop">>
 
 
@@ -922,7 +1036,7 @@ setup.addPlaceholder = () => {
 <<include "navbuttonsb">>
 
 :: game4-content [nobr]
-content
+
 <<include "game4-codeword">>
 
 :: game4-codeword [nobr]
@@ -961,7 +1075,7 @@ content
 :: game4-outro [nobr]
 <<set $prevpass to "game4">>
 <<set $pass to "game4-outro">>
-<<set $nextpass to "game4">>
+<<set $nextpass to "end">>
 <<audio ":all" "stop">>
 
 <<include "_templateStory">>
