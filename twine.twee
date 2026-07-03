@@ -240,7 +240,7 @@ setup.addPlaceholder = () => {
 
 /* <div class="hide warning"><h1>Please view this on a phone</h1></div> */
 <main class="landing flex-col-cen">
-<span>Harris Academy Kingswood presents...</span>
+<p>Harris Academy Kingswood presents...</p>
 <h2>Welcome</h2>
   <h1 class="computer">Party</h1>
 <<button "Begin">>
@@ -859,13 +859,13 @@ answer: "answer"},
 
 </div>
 
-<p>
+/* <p>
 Time remaining:
 <span id="memoryTimer">10</span>
-</p>
+</p> */
 
 
-<<timed 3s>>
+<<timed 10s>>
     <<set $game3Stage = "questions">>
     <<replace "#gameArea3">>
         <<include "game3-content">>
@@ -1111,7 +1111,7 @@ Time remaining:
 <<set $pass to "end">>
 <<set $nextpass to "end">>
 
-<<include "header">>
+
 <main>
     <p>Closing image </p> 
         <div class="btn-container">
