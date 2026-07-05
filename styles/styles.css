@@ -206,8 +206,8 @@ button.link-image.link-internal:hover, html[data-outlines] button.link-image.lin
   width: 100%;
   bottom: 0;
   left: 0;
-  padding: 1.5rem;
-  /* background: var(--greyblue); */
+  padding: 0.5rem;
+  background: var(--black);
 }
 
 .footer-icons > a {
@@ -228,6 +228,7 @@ button.link-image.link-internal:hover, html[data-outlines] button.link-image.lin
 
 .footer-icons > a > img {
   width: 2rem;
+  filter: invert();
 }
 
 body.maroon .footer-icons > a {
@@ -289,7 +290,7 @@ padding: 2rem;
 
 main {
   height: 100%;
-  margin-block-start: 6rem;
+min-height: 70vh;
 margin-block-end: 10rem;
 display: flex;
 flex-direction: column;
@@ -398,6 +399,31 @@ body.lime{
   body.lime button:focus,
   body.lime button:active {
     background-color: var(--pink);
+    color: var(--white);
+  }
+
+
+  /* blue  */
+body.blue{
+  background-color: #a7b5c5;
+  color:black;
+  }
+  
+  body.blue button {
+    background: var(--black);
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.blue .nav-btn-container > button{
+    background: var(--white);
+    color: var(--black);
+  }
+  
+  body.blue button:hover,
+  body.blue button:focus,
+  body.blue button:active {
+    background-color: var(--maroon);
     color: var(--white);
   }
 
@@ -790,7 +816,7 @@ opacity: 1;
 
  main.landing{
   text-align: center;
-  height: 70vh;
+  /* height: 70vh; */
  }
 
 
@@ -804,12 +830,18 @@ opacity: 1;
 
 
  main.landing > h2{
-  font-size: clamp(1rem, 5.5vw, 3rem);
+  font-size: clamp(1rem, 5.5vw, 5rem);
   white-space: nowrap;
+  font-family: var(--font-computer);
  }
 
  main.landing > .inline-accented-img {
   margin-block-end: 2.8rem;
+ }
+
+ main.landing > .stamp-container{
+  max-width: 20rem;
+  align-self: end;
  }
 
  /* DECORATIVE TEXT  */
@@ -930,12 +962,15 @@ main.game1{
 #gameArea1 {
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #681038;
-  padding: 4rem;
-  color: white;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--maroon);
+      padding: 4rem;
+      color: white;
+      border-radius: 14px;
+      width: 50rem;
+
 }
 
 #gameArea1 > .buttons-container{
@@ -947,25 +982,29 @@ main.game1{
 
 /* GAME 2  */
 
-#gameArea {
+#gameArea2 {
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .statement {
+  background-color: var(--maroon);
   text-align: center;
   font-size: 2rem;
   padding: 30px;
   z-index: 5;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }
 
 .split-screen {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
-
   position: relative;
+  max-height: 50%;
 }
 
 .side {
@@ -973,6 +1012,16 @@ main.game1{
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+#gameArea2 > .buttons{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loading > .statement{
+background-color: var(--black);
 }
 
 /* Simple colours */
@@ -1010,7 +1059,7 @@ main.game1{
 }
 
 .mountains {
-  background-image: url("../assets/img/mountains-bg.jpg");
+  background-image: url("../assets/img/mountain-bg.jpg");
 }
 
 .movie {
@@ -1052,10 +1101,12 @@ main.game1{
 
 .game3-images{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap:2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      max-width: 80%;
+      margin: auto;
 
 }
 
@@ -1065,6 +1116,10 @@ main.game1{
 
 span.answer{
   color: var(--pink)
+}
+
+h2#memoryTimer{
+  font-size: 8rem;
 }
 
 /* GAME 4  */
@@ -1087,13 +1142,13 @@ span.answer{
 
   main{
     max-width: 1000px;
-    margin-block-start: 4rem;
+
     padding: 1rem 6rem;
   }
 
   p {
     font-size: 2.5rem;
-    line-height: 3rem;
+    line-height: 3.5rem;
   }
 
   .choice-item > span{
@@ -1127,10 +1182,10 @@ header.standard> .title-wrapper > h2 {
  
 }
 .footer-icons {
-padding: 3rem
+padding: 1.5rem
 }
 .footer-icons > a > img {
-  width: 3rem;
+  width: 2rem;
 }
 
 .codeinput{

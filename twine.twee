@@ -240,6 +240,9 @@ setup.addPlaceholder = () => {
 
 /* <div class="hide warning"><h1>Please view this on a phone</h1></div> */
 <main class="landing flex-col-cen">
+<div class="stamp-container">
+<img src="assets/img/stamp.png">
+</div>
 <p>Harris Academy Kingswood presents...</p>
 <h2>Welcome</h2>
   <h1 class="computer">Party</h1>
@@ -341,8 +344,9 @@ setup.addPlaceholder = () => {
 
 :: intro1-text [nobr]
 <<timed 0.2s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Intro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
+    <br/>
 <p>Hello</p>
 <p>We are students from across different years</p>
 <p>We’ve made this for you as we’ve been where you are. </p>
@@ -392,7 +396,7 @@ setup.addPlaceholder = () => {
 
 :: game1-intro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_1_Intro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 
 
@@ -437,8 +441,9 @@ setup.addPlaceholder = () => {
 <</if>>
 
 <main class="game1">
-
-<<include "game1-content">>
+<div id="gameArea1">
+    <<include "game1-content">>
+</div>
 
 </main>
 
@@ -446,13 +451,19 @@ setup.addPlaceholder = () => {
 
 :: game1-content [nobr]
 
-<div id="gameArea1">
+
 
     <div class="statement">
       <p>  <<= $statementsGame1[$statementIndexGame1]>></p>
     </div>
 
     <div class="buttons-container">
+
+     <<if $statementIndexGame1 === 0>>
+        <<button "Back">>
+       
+        <</button>>
+    <</if>>
 
     <<if $statementIndexGame1 gt 0>>
         <<button "Back">>
@@ -484,7 +495,7 @@ setup.addPlaceholder = () => {
 
     </div>
 
-</div>
+
 
 :: game1-outro [nobr]
 <<set $prevpass to "game1">>
@@ -492,11 +503,12 @@ setup.addPlaceholder = () => {
 <<set $nextpass to "game2-landing">>
 <<audio ":all" "stop">>
 <<addclass "body" "lime">>
+<<set $currentGame = $games[1]>>
 <<include "_templateStory">>
 
 :: game1-outro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_1_Outro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 <div id="msgMount">
 </div>
@@ -531,7 +543,7 @@ setup.addPlaceholder = () => {
 
 :: game2-intro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_2_Intro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 
 <p>Welcome to This or That, where you will be faced with a series of statements that you may either agree or disagree with! </p>
@@ -554,7 +566,7 @@ setup.addPlaceholder = () => {
 <<set $prevpass = "game2-intro">>
 <<set $pass = "game2">>
 <<set $nextpass = "game2-outro">>
-
+<<addclass "body" "blue">>
 <<audio ":all" "stop">>
 
 <<if $statementsGame2 is undefined>>
@@ -610,7 +622,7 @@ setup.addPlaceholder = () => {
 <<if $statementIndexGame2 is undefined>>
 <<set $statementIndexGame2 = 0>>
 <</if>>
-
+<br/>
 <main>
 
 <<include "game2-content">>
@@ -621,7 +633,7 @@ setup.addPlaceholder = () => {
 
 :: game2-content [nobr]
 
-<div id="gameArea">
+<div id="gameArea2">
 
    <div class="statement">
     <<= $statementsGame2[$statementIndexGame2].question >>
@@ -642,13 +654,17 @@ setup.addPlaceholder = () => {
     </div>
 
 </div>
-
+<br/>
     <div class="buttons">
-
+<<if $statementIndexGame2 === 0>>
+        <<button "Back">>
+   
+        <</button>>
+    <</if>>
     <<if $statementIndexGame2 gt 0>>
         <<button "Back">>
             <<set $statementIndexGame2-->>
-            <<replace "#gameArea">>
+            <<replace "#gameArea2">>
                 <<include "game2-content">>
             <</replace>>
         <</button>>
@@ -656,16 +672,30 @@ setup.addPlaceholder = () => {
 
     <<if $statementIndexGame2 lt $statementsGame2.length - 1>>
 
-        <<button "Next">>
-            <<set $statementIndexGame2++>>
-            <<replace "#gameArea">>
-                <<include "game2-content">>
-            <</replace>>
-        <</button>>
+      <<button "Next">>
+
+    <<replace "#gameArea2">>
+        <div class="loading">
+        <div class="statement">
+            Loading...
+            </div>
+        </div>
+    <</replace>>
+
+    <<timed 2s>>
+        <<set $statementIndexGame2++>>
+        <<replace "#gameArea2">>
+            <<include "game2-content">>
+        <</replace>>
+    <</timed>>
+
+<</button>>
 
     <<else>>
+          <<button "Next">>
+            <<goto $nextpass>>
+        <</button>>
 
-        [[Finish->game2-outro]]
 
     <</if>>
 
@@ -683,12 +713,12 @@ setup.addPlaceholder = () => {
 <<set $pass to "game2-outro">>
 <<set $nextpass to "game3-landing">>
 <<audio ":all" "stop">>
-
+<<set $currentGame = $games[2]>>
 <<include "_templateStory">>
 
 :: game2-outro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_2_Outro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 <p>Thank you for playing This or That. </p>
 <p>Your time here will be filled with making decisions</p>
@@ -706,7 +736,7 @@ setup.addPlaceholder = () => {
 
 
 :: game3-landing [nobr]
-<<set $prevpass to "game3-outro">>
+<<set $prevpass to "game2-outro">>
 <<set $pass to "game3-landing">>
 <<set $nextpass to "game3-intro">>
 <<audio ":all" "stop">>
@@ -724,7 +754,7 @@ setup.addPlaceholder = () => {
 
 :: game3-intro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_3_Intro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 
 <p>Knowing where you need to be and when is going to help you here. </p>
@@ -835,7 +865,6 @@ answer: "answer"},
 
 :: game3-content [nobr]
 
-
 <<set _round = $roundsGame3[$roundIndexGame3]>>
 
 <div id="gameArea3">
@@ -845,49 +874,72 @@ answer: "answer"},
 <!-- ========================================================= -->
 <<case "images">>
 
-<h1>Round <<= $roundIndexGame3 + 1>></h1>
+<<if $memoryTimer is undefined or $memoryTimer != 10>>
+    <<set $memoryTimer = 10>>
+<</if>>
+
+<header class="game-intro-header">
+    <h1>Round <<= $roundIndexGame3 + 1>></h1>
+
+    <div class="memory-timer">
+        <h2 id="memoryTimer"><<= $memoryTimer>></h2>
+    </div>
+</header>
+
+<<repeat 1s>>
+
+    <<set $memoryTimer-->>
+
+    <<replace "#memoryTimer">>
+        <<= Math.max($memoryTimer,0) >>
+    <</replace>>
+
+    <<if $memoryTimer <= 0>>
+        <<stop>>
+    <</if>>
+
+<</repeat>>
 
 <div class="game3-images">
 
 <<for _img range _round.images>>
-    <<capture _img>>
     <div class="memory-image">
-    [img[_img]]
+        [img[_img]]
     </div>
-    <</capture>>
 <</for>>
 
 </div>
 
-/* <p>
-Time remaining:
-<span id="memoryTimer">10</span>
-</p> */
-
-
 <<timed 10s>>
+
+    <<set $memoryTimer = 10>>
     <<set $game3Stage = "questions">>
+
     <<replace "#gameArea3">>
         <<include "game3-content">>
     <</replace>>
+
 <</timed>>
 
 <!-- ========================================================= -->
 <<case "questions">>
 
-<h1>Round <<= $roundIndexGame3 + 1>>: Questions</h1>
-<br/>
+<header class="game-intro-header">
+    <h1>Round <<= $roundIndexGame3 + 1>>: Questions</h1>
+</header>
+
 <ul>
-    <<for _q range _round.questions>>
+<<for _q range _round.questions>>
     <li><p><<= _q.question>></p></li>
-    <</for>>
+<</for>>
 </ul>
-<br/>
+
 <div id="revealButton"></div>
 
 <<timed 5s>>
 
 <<replace "#revealButton">>
+
 <h2>Teacher, check answers.</h2>
 <br/>
 <<button "Reveal answers">>
@@ -907,38 +959,48 @@ Time remaining:
 <!-- ========================================================= -->
 <<case "answers">>
 
-<h1>Round <<= $roundIndexGame3 + 1>>: Questions</h1>
-<br/>
+<header class="game-intro-header">
+    <h1>Round <<= $roundIndexGame3 + 1>>: Answers</h1>
+</header>
+
 <ul>
 
 <<for _q range _round.questions>>
-<<capture _q>>
 <li>
-   <p> <<= _q.question>>  <span class="answer"> <strong>Answer:</strong> <<= _q.answer>></span>
-   </p>
+<p>
+<<= _q.question>>
+<span class="answer">
+<strong>Answer:</strong>
+<<= _q.answer>>
+</span>
+</p>
 </li>
-<</capture>>
 <</for>>
+
 </ul>
 
 <<if $roundIndexGame3 < $roundsGame3.length - 1>>
-<br/>
+
 <<timed 5s>>
+
 <<button "Next Round">>
+
     <<set $roundIndexGame3++>>
     <<set $game3Stage = "images">>
+    <<set $memoryTimer = 10>>
 
     <<replace "#gameArea3">>
         <<include "game3-content">>
     <</replace>>
+
 <</button>>
+
 <</timed>>
 
 <<else>>
 
-<br/>
 <<button "Finish">>
-  <<goto $nextpass>>
+    <<goto $nextpass>>
 <</button>>
 
 <</if>>
@@ -952,12 +1014,12 @@ Time remaining:
 <<set $pass to "game3-outro">>
 <<set $nextpass to "game4-landing">>
 <<audio ":all" "stop">>
-
+<<set $currentGame = $games[3]>>
 <<include "_templateStory">>
 
 :: game3-outro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_3_Outro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 <p class="bold">GAME 3: Memory</p>
 <div id="msgMount">
@@ -996,7 +1058,7 @@ Time remaining:
 
 :: game4-intro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_4_Intro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 <p class="bold">GAME 4: The Tour Game</p>
 <div id="msgMount">
@@ -1077,12 +1139,12 @@ Time remaining:
 <<set $pass to "game4-outro">>
 <<set $nextpass to "end">>
 <<audio ":all" "stop">>
-
+<<set $currentGame = $games[4]>>
 <<include "_templateStory">>
 
 :: game4-outro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/BasildonOutro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 <p class="bold">GAME 4: Outro</p>
 <div id="msgMount">
@@ -1111,12 +1173,17 @@ Time remaining:
 <<set $pass to "end">>
 <<set $nextpass to "end">>
 
+<<addclass "body" "lime">>
 
-<main>
-    <p>Closing image </p> 
-        <div class="btn-container">
-
-            <<button "Back">>
+/* <div class="hide warning"><h1>Please view this on a phone</h1></div> */
+<main class="landing flex-col-cen">
+<div class="stamp-container">
+<img src="assets/img/stamp.png">
+</div>
+<p>Harris Academy Kingswood presents...</p>
+<h1 class="computer">Welcome Party</h1>
+  <h2 class="computer">Goodbye!</h2>
+ <<button "Back">>
                 <<goto $prevpass>>
             <</button>>
             <<button "Start again">>
@@ -1124,5 +1191,4 @@ Time remaining:
                 Engine.restart()
                 <</script>>
                 <</button>>
-        </div>
 </main>
