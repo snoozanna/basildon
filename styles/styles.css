@@ -946,6 +946,7 @@ header.game-intro-header{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem;
 }
 
 header.game-intro-header > h1{
@@ -1104,16 +1105,29 @@ background-color: var(--black);
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 2rem;
-      max-width: 80%;
+      gap: 1.5rem;
+      max-width: 100%;
       margin: auto;
 
 }
 
-.game3-images > .memory-image{
-  max-width: 30%;
+.game3-images > .game3-image-wrapper{
+  width: 30%;
+
 }
 
+.game3-images > .game3-image-wrapper.final{
+  width: 40%;
+}
+
+.game3-images .memory-image{
+  max-width: 100%;
+}
+
+.game3-images > div> .game3-image-no{
+  font-size: 2rem;
+  font-weight: bold;
+}
 span.answer{
   color: var(--pink)
 }

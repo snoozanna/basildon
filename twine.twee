@@ -86,7 +86,7 @@ setup.addPlaceholder = () => {
     const textbox = document.getElementById("textbox-codeword");
     if (textbox) {
         console.log("Found textbox:", textbox);
-        textbox.setAttribute("placeholder", "Type here");
+        textbox.setAttribute("placeholder", "Type your codeword here");
     }
 
 } 
@@ -400,12 +400,12 @@ setup.addPlaceholder = () => {
     <</timed>>
 
 
-<p>Welcome to ‘And You Are?’ </p>
+<p>Welcome to <b>‘And You Are?’ The Game</b> </p>
 <p>This game is a bit like heads down thumbs up - but we’ve changed it!</p>
 <p>You will place your head down on the desk</p>
 <p>There will be statements on the screen, which your teacher will read out. </p>
 <p>If you agree or have something in common with that statement, raise your head and look at who else has their heads raised. </p>
-<p><b>(You can’t speak - but you can make eye contact with that person)</b></p>
+<p>You can’t speak - but you can make eye contact with that person</p>
 <p>Then put your head down again, the teacher click ‘Next’ to reveal the next statement! </p>
 <br/>
 <p>Ready? Then get your heads on the table and let’s begin! </p>
@@ -515,8 +515,7 @@ setup.addPlaceholder = () => {
 <p>Thanks for playing. </p>
 <p>When we made these games, we played and then reflected. </p>
 <p>You might want to do that now. </p>
-<p>What did you connect on? </p>
-<p>Can you find something you all would put your head up for? </p>
+<p>Can you find something you would all put your head up for? And if so, what would it be?  </p>
 <p>Something you all connect on.</p>
 <p>When ready to move on, click ‘next’ for the next game. </p>
 <br/>
@@ -722,8 +721,8 @@ setup.addPlaceholder = () => {
     <</timed>>
 <p>Thank you for playing This or That. </p>
 <p>Your time here will be filled with making decisions</p>
-<p>Sometimes you will agree with others, sometimes you won’t.</p> 
-<p>We should try to keep calm and allow people to express their opinions though. </p>
+<p>Sometimes you will agree with others and sometimes you won’t.</p> 
+<p>We should try to keep calm and allow other people to express their own opinions. </p>
 <br/>
 <p>We hope you’ve made some connections - and maybe learnt a bit about the rest of your form group too. </p>
 <p>Maybe you should all order a pineapple pizza now, or not? </p>
@@ -788,61 +787,58 @@ setup.addPlaceholder = () => {
     images: ["../assets/img/game3/square.png","../assets/img/game3/rectangle.jpg", "../assets/img/game3/triangle.png", "../assets/img/game3/oblong.png", "../assets/img/game3/circle.png" ], 
     questions: [
         {question:"1. What colour was the triangle?",
-    answer: "answer",
+    answer: "Pink",
 },
 {question: "2. What colour was the circle?",
-answer: "white"},
+answer: "White"},
 {question: "3. How many rectangles were there?",
 answer: "2"},
 {question: "4. Which shape was red?",
-answer: "square"},
+answer: "Square"},
 {question: "5. Which shape was green?",
-answer: "rectangle"},
-{question: "6. How many squares were there?",
-answer: "1"},
+answer: "Rectangle"},
     ]
 },
 {
     images: ["../assets/img/game3/1.png","../assets/img/game3/2.png", "../assets/img/game3/3.png", "../assets/img/game3/4.png", "../assets/img/game3/5.png" ], 
     questions: [
-        {question:"1.What colour was the book?",
-    answer: "yellow",
-},
-{question: "2. Where does the box need to be returned to?",
+{question: "1. Where does the box need to be returned to?",
 answer: "MU2"},
-{question: "3. What class is the book from?",
+{question: "2. What class is the book from?",
 answer: "M11"},
-{question: "4. What colour is the sharpener?",
-answer: "blue"},
-{question: "5. Was the pen black or blue?",
-answer: "neither - green"},
-{question: "6. What colour was the tape measure? ",
-answer: "black and red"},
+{question: "3. What colour is the sharpener?",
+answer: "Blue"},
+{question: "4. Was the pen black or blue?",
+answer: "Neither - green"},
+{question: "5. What colour was the tape measure? ",
+answer: "Black and red"},
     ]
 },
 {
     images: ["../assets/img/game3/6.png","../assets/img/game3/7.png", "../assets/img/game3/8.png", "../assets/img/game3/9.png", "../assets/img/game3/10.png" ], 
     questions: [
-        {question:"1.What notebook had square lines?",
-    answer: "answer",
+        {question:"1. What notebook had square lines?",
+    answer: "Book 4",
 },
-{question: "2. What were the pictures in the fourth book?",
-answer: "tbc"},
-{question: "3. What colour was the bookmark?",
-answer: "yellow and black"},
-{question: "4. Did any notebook have writing in?",
-answer: "answer"},
-{question: "5. Which notebook had metal rings?",
-answer: "answer"},
-{question: "6. Which notebook had stickers on the cover? ",
-answer: "answer"},
+{question: "2. What were the pictures in the fifth book?",
+answer: "Dogs"},
+{question: "3. Did any notebook have writing in?",
+answer: "No"},
+{question: "4. Which notebook had stickers on the cover? ",
+answer: "Book 5"},
     ]
 },
 {
     images: ["../assets/img/game3/Timetable1.png","../assets/img/game3/Timetable2.png", "../assets/img/game3/Timetable3.png"], 
     questions: [
         {question:"1. What was the Blue timetable?",
-    answer: "answer",
+    answer: ` <br/>
+    Period 1 English<br/>
+    Period 2 Music <br/>
+Period 3️ Modern Foreign Languages <br/>
+Period 4 Mathematics  <br/>
+Period 5️ Design & Technology  <br/>
+`,
 },
 
     ]
@@ -850,12 +846,12 @@ answer: "answer"},
 ]>>
 <</if>>
 
-<<if $roundIndexGame3 is undefined>>
+
 <<set $roundIndexGame3 = 0>>
 <<set $game3Stage = "images">>
-<</if>>
 
-<main>
+
+<main class="game-3-main">
 <<include "game3-content">>
 
 </main>
@@ -901,12 +897,27 @@ answer: "answer"},
 <</repeat>>
 
 <div class="game3-images">
-
-<<for _img range _round.images>>
-    <div class="memory-image">
-        [img[_img]]
-    </div>
+<<if $roundIndexGame3 <= 2>>>
+<<for _i, _img range _round.images>>
+    <<set $imageNo to _i + 1>>
+<div class="game3-image-wrapper">
+    <span class="game3-image-no">$imageNo.</span>
+        <div class="memory-image">
+            [img[_img]]
+        </div>
+</div>
 <</for>>
+<<else>>
+<<for _i, _img range _round.images>>
+    <<set $imageNo to _i + 1>>
+<div class="game3-image-wrapper final">
+    <span class="game3-image-no">$imageNo.</span>
+        <div class="memory-image">
+            [img[_img]]
+        </div>
+</div>
+<</for>>
+    <</if>>
 
 </div>
 
@@ -1028,7 +1039,7 @@ answer: "answer"},
 <p>We can’t see as we are pre-recorded - but well done! </p>
 <p>We hope this game helps you learn your timetable</p>
 <p>It’s not a fun task to do - but it will help you settle in - and not be late. </p>
-<p>But where you will go, that’s in our last game...</p>
+<p>But where you will you go, that’s in our last game...</p>
 <br/>
 <p>When ready to move on, click ‘next’ for the next game. </p>
 
@@ -1067,10 +1078,11 @@ answer: "answer"},
 <p>Now we have already played a couple of games</p>
 <p>But, sadly, our time is coming to an end.</p>
 <p>But don’t worry we have time for one more - The Tour Game.</p>
-<p>Basically you are going to receive a map that will have 5 locations written on it.</p>
+<p>So, how does this work? </p>
+<p>You are going to receive a map that will have 5 locations written on it.</p>
 <br/>
-<p>At each place there will be something that you need to look out for aka a treasure hunt.  </p>
-<p>These five items will help you make a CODEWORD that will help you complete the game. </p>
+<p>At each place there will be something that you need to look out for A.K.A. a treasure hunt.  </p>
+<p>These five items will give you 5 letters that will help you complete the game.  </p>
 <p>Remember where you go too - it’ll help</p>
 <p>Teacher, all of the information is on the MAP. </p>
 <p>Good luck.</p>
