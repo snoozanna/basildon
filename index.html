@@ -355,25 +355,28 @@ setup.addPlaceholder = () => {
     &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;assets/audio/Intro.mp3&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
     &lt;br/&gt;
-&lt;p&gt;Hello&lt;/p&gt;
-&lt;p&gt;We are students from across different years&lt;/p&gt;
+&lt;p&gt;Hello,&lt;/p&gt;
+&lt;p&gt;We are students from across different years.&lt;/p&gt;
 &lt;p&gt;We’ve made this for you as we’ve been where you are. &lt;/p&gt;
 &lt;p&gt;We’ve all been new here and we know how you might be feeling&lt;/p&gt;
 &lt;p&gt;Nervous, excited, slightly confused!&lt;/p&gt;
 &lt;p&gt;All of which is ok. &lt;/p&gt;
 &lt;p&gt;It would be odd if you didn’t feel a mix of all those things. &lt;/p&gt;
+
 &lt;br/&gt;
-&lt;p&gt;We’ve made this Welcome Game&lt;/p&gt;
-&lt;p&gt;A game to help you settle in&lt;/p&gt;
-&lt;p&gt;Make you feel at ease&lt;/p&gt;
+&lt;p&gt;We’ve made this Welcome Game,&lt;/p&gt;
+&lt;p&gt;A game to help you settle in,&lt;/p&gt;
+&lt;p&gt;Make you feel at ease,&lt;/p&gt;
 &lt;p&gt;To welcome you. &lt;/p&gt;
 &lt;p&gt;To Harris Academy Kingswood.&lt;/p&gt;
+
 &lt;br/&gt;
-&lt;p&gt;It’ll have some tips to help being in a massive school&lt;/p&gt;
-&lt;p&gt;And some tools to remember your timetable&lt;/p&gt;
+&lt;p&gt;It’ll have some tips to help being in a massive school,&lt;/p&gt;
+&lt;p&gt;And some tools to remember your timetable,&lt;/p&gt;
 &lt;p&gt;But also, it’ll have games. &lt;/p&gt;
 &lt;p&gt;And with games - there’s prizes. &lt;/p&gt;
 &lt;p&gt;Complete our challenges then you get a prize. &lt;/p&gt;
+
 &lt;br/&gt;
 &lt;p&gt;Shall we get started? &lt;/p&gt;
 &lt;br/&gt;
@@ -417,13 +420,13 @@ setup.addPlaceholder = () => {
 &quot;Have a sibling&quot;,
 &quot;Likes watching films&quot;,
 &quot;Enjoy art&quot;,
-&quot;Has a friend in the class&quot;,
+&quot;Have a friend in the class&quot;,
 &quot;Supports a football team&quot;,
-&quot;Is organised&quot;,
+&quot;Are organised&quot;,
 &quot;Enjoys coming to school&quot;,
 &quot;Have a hidden talent&quot;,
 &quot;Likes to play sports&quot;,
-&quot;Likes listening to music&quot;
+&quot;Likes pineapple on pizza&quot;
 ]&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
@@ -493,7 +496,6 @@ setup.addPlaceholder = () => {
 &lt;p&gt;When we made these games, we played and then reflected. &lt;/p&gt;
 &lt;p&gt;You might want to do that now. &lt;/p&gt;
 &lt;p&gt;Can you find something you would all put your head up for? And if so, what would it be?  &lt;/p&gt;
-&lt;p&gt;Something you all connect on.&lt;/p&gt;
 &lt;p&gt;When ready to move on, click ‘next’ for the next game. &lt;/p&gt;
 &lt;br/&gt;
 &lt;&lt;button &quot;Next&quot;&gt;&gt;
@@ -805,8 +807,8 @@ Period 5️ Design &amp; Technology  &lt;br/&gt;
 &lt;!-- ========================================================= --&gt;
 &lt;&lt;case &quot;images&quot;&gt;&gt;
 
-&lt;&lt;if $memoryTimer is undefined or $memoryTimer != 10&gt;&gt;
-    &lt;&lt;set $memoryTimer = 10&gt;&gt;
+&lt;&lt;if $memoryTimer is undefined or $memoryTimer != 20&gt;&gt;
+    &lt;&lt;set $memoryTimer = 20&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 &lt;header class=&quot;game-intro-header&quot;&gt;
@@ -856,9 +858,9 @@ Period 5️ Design &amp; Technology  &lt;br/&gt;
 
 &lt;/div&gt;
 
-&lt;&lt;timed 10s&gt;&gt;
+&lt;&lt;timed 20s&gt;&gt;
 
-    &lt;&lt;set $memoryTimer = 10&gt;&gt;
+    &lt;&lt;set $memoryTimer = 20&gt;&gt;
     &lt;&lt;set $game3Stage = &quot;questions&quot;&gt;&gt;
 
     &lt;&lt;replace &quot;#gameArea3&quot;&gt;&gt;
@@ -968,7 +970,7 @@ Period 5️ Design &amp; Technology  &lt;br/&gt;
 &lt;p&gt;We can’t see as we are pre-recorded - but well done! &lt;/p&gt;
 &lt;p&gt;We hope this game helps you learn your timetable&lt;/p&gt;
 &lt;p&gt;It’s not a fun task to do - but it will help you settle in - and not be late. &lt;/p&gt;
-&lt;p&gt;But where you will you go, that’s in our last game...&lt;/p&gt;
+&lt;p&gt;But where will you go, that’s in our last game...&lt;/p&gt;
 &lt;br/&gt;
 &lt;p&gt;When ready to move on, click ‘next’ for the next game. &lt;/p&gt;
 
@@ -1052,11 +1054,11 @@ Period 5️ Design &amp; Technology  &lt;br/&gt;
 
 &lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="game4-outro" tags="nobr" position="600,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;game4-outro&quot;&gt;&gt;
-&lt;&lt;set $nextpass to &quot;end&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;final-outro&quot;&gt;&gt;
 &lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
 &lt;&lt;set $currentGame = $games[4]&gt;&gt;
 &lt;&lt;include &quot;_templateStory&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="game4-outro-text" tags="nobr" position="725,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
-    &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;assets/audio/BasildonOutro.mp3&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
+    &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;assets/audio/Game_4_Outro.mp3&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 &lt;p class=&quot;bold&quot;&gt;GAME 4: Outro&lt;/p&gt;
 &lt;div id=&quot;msgMount&quot;&gt;
@@ -1066,6 +1068,18 @@ Period 5️ Design &amp; Technology  &lt;br/&gt;
 &lt;p&gt;Remember them! &lt;/p&gt;
 &lt;p&gt;We chose that going to a new school you have to ADAPT to new challenges, such as the school. &lt;/p&gt;
 &lt;br/&gt;
+&lt;&lt;button &quot;Next&quot;&gt;&gt;
+    &lt;&lt;goto $nextpass&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="final-outro" tags="nobr" position="850,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4-outro&quot;&gt;&gt;
+&lt;&lt;set $pass to &quot;final-outro&quot;&gt;&gt;
+&lt;&lt;set $nextpass to &quot;end&quot;&gt;&gt;
+&lt;&lt;audio &quot;:all&quot; &quot;stop&quot;&gt;&gt;
+
+&lt;&lt;include &quot;_templateIntro&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="final-outro-text" tags="nobr" position="975,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;append &quot;#audio&quot;&gt;&gt;&lt;&lt;if $userchoices.audioOn is true&gt;&gt;&lt;audio src=&quot;assets/audio/BasildonOutro.mp3&quot; autoplay id=&quot;bgAudio&quot;&gt;Audio is not supported on your device&lt;/audio&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;br/&gt;
+
 &lt;p&gt;And now we are back to where it all started, YOUR TUTOR BASE.&lt;/p&gt;
 &lt;br/&gt;
 &lt;p&gt;Now, we did promise prizes didn’t we?&lt;/p&gt;
@@ -1078,7 +1092,7 @@ Period 5️ Design &amp; Technology  &lt;br/&gt;
 &lt;br/&gt;
 &lt;&lt;button &quot;Next&quot;&gt;&gt;
     &lt;&lt;goto $nextpass&gt;&gt;
-    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="end" tags="nobr" position="850,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4-outro&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="end" tags="nobr" position="1100,600" size="100,100">&lt;&lt;set $prevpass to &quot;game4-outro&quot;&gt;&gt;
 &lt;&lt;set $pass to &quot;end&quot;&gt;&gt;
 &lt;&lt;set $nextpass to &quot;end&quot;&gt;&gt;
 

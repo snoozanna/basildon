@@ -347,25 +347,28 @@ setup.addPlaceholder = () => {
     <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Intro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
     <br/>
-<p>Hello</p>
-<p>We are students from across different years</p>
+<p>Hello,</p>
+<p>We are students from across different years.</p>
 <p>We’ve made this for you as we’ve been where you are. </p>
 <p>We’ve all been new here and we know how you might be feeling</p>
 <p>Nervous, excited, slightly confused!</p>
 <p>All of which is ok. </p>
 <p>It would be odd if you didn’t feel a mix of all those things. </p>
+
 <br/>
-<p>We’ve made this Welcome Game</p>
-<p>A game to help you settle in</p>
-<p>Make you feel at ease</p>
+<p>We’ve made this Welcome Game,</p>
+<p>A game to help you settle in,</p>
+<p>Make you feel at ease,</p>
 <p>To welcome you. </p>
 <p>To Harris Academy Kingswood.</p>
+
 <br/>
-<p>It’ll have some tips to help being in a massive school</p>
-<p>And some tools to remember your timetable</p>
+<p>It’ll have some tips to help being in a massive school,</p>
+<p>And some tools to remember your timetable,</p>
 <p>But also, it’ll have games. </p>
 <p>And with games - there’s prizes. </p>
 <p>Complete our challenges then you get a prize. </p>
+
 <br/>
 <p>Shall we get started? </p>
 <br/>
@@ -426,13 +429,13 @@ setup.addPlaceholder = () => {
 "Have a sibling",
 "Likes watching films",
 "Enjoy art",
-"Has a friend in the class",
+"Have a friend in the class",
 "Supports a football team",
-"Is organised",
+"Are organised",
 "Enjoys coming to school",
 "Have a hidden talent",
 "Likes to play sports",
-"Likes listening to music"
+"Likes pineapple on pizza"
 ]>>
 <</if>>
 
@@ -516,7 +519,6 @@ setup.addPlaceholder = () => {
 <p>When we made these games, we played and then reflected. </p>
 <p>You might want to do that now. </p>
 <p>Can you find something you would all put your head up for? And if so, what would it be?  </p>
-<p>Something you all connect on.</p>
 <p>When ready to move on, click ‘next’ for the next game. </p>
 <br/>
 <<button "Next">>
@@ -870,8 +872,8 @@ Period 5️ Design & Technology  <br/>
 <!-- ========================================================= -->
 <<case "images">>
 
-<<if $memoryTimer is undefined or $memoryTimer != 10>>
-    <<set $memoryTimer = 10>>
+<<if $memoryTimer is undefined or $memoryTimer != 20>>
+    <<set $memoryTimer = 20>>
 <</if>>
 
 <header class="game-intro-header">
@@ -921,9 +923,9 @@ Period 5️ Design & Technology  <br/>
 
 </div>
 
-<<timed 10s>>
+<<timed 20s>>
 
-    <<set $memoryTimer = 10>>
+    <<set $memoryTimer = 20>>
     <<set $game3Stage = "questions">>
 
     <<replace "#gameArea3">>
@@ -1039,7 +1041,7 @@ Period 5️ Design & Technology  <br/>
 <p>We can’t see as we are pre-recorded - but well done! </p>
 <p>We hope this game helps you learn your timetable</p>
 <p>It’s not a fun task to do - but it will help you settle in - and not be late. </p>
-<p>But where you will you go, that’s in our last game...</p>
+<p>But where will you go, that’s in our last game...</p>
 <br/>
 <p>When ready to move on, click ‘next’ for the next game. </p>
 
@@ -1149,14 +1151,14 @@ Period 5️ Design & Technology  <br/>
 :: game4-outro [nobr]
 <<set $prevpass to "game4">>
 <<set $pass to "game4-outro">>
-<<set $nextpass to "end">>
+<<set $nextpass to "final-outro">>
 <<audio ":all" "stop">>
 <<set $currentGame = $games[4]>>
 <<include "_templateStory">>
 
 :: game4-outro-text [nobr]
   <<timed 0.1s>>
-    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/BasildonOutro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/Game_4_Outro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
     <</timed>>
 <p class="bold">GAME 4: Outro</p>
 <div id="msgMount">
@@ -1166,6 +1168,23 @@ Period 5️ Design & Technology  <br/>
 <p>Remember them! </p>
 <p>We chose that going to a new school you have to ADAPT to new challenges, such as the school. </p>
 <br/>
+<<button "Next">>
+    <<goto $nextpass>>
+    <</button>>
+
+:: final-outro [nobr]
+<<set $prevpass to "game4-outro">>
+<<set $pass to "final-outro">>
+<<set $nextpass to "end">>
+<<audio ":all" "stop">>
+
+<<include "_templateIntro">>
+:: final-outro-text [nobr]
+  <<timed 0.1s>>
+    <<append "#audio">><<if $userchoices.audioOn is true>><audio src="assets/audio/BasildonOutro.mp3" autoplay id="bgAudio">Audio is not supported on your device</audio><</if>><</append>>
+    <</timed>>
+<br/>
+
 <p>And now we are back to where it all started, YOUR TUTOR BASE.</p>
 <br/>
 <p>Now, we did promise prizes didn’t we?</p>
